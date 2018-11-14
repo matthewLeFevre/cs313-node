@@ -1,0 +1,23 @@
+{
+  "name": "cs313-node",
+  "version": "1.0.0",
+  "description": "Class project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewLeFevre/cs313-node.git"
+  },
+  "author": "Matthew LeFevre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthewLeFevre/cs313-node/issues"
+  },
+  "homepage": "https://github.com/matthewLeFevre/cs313-node#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}

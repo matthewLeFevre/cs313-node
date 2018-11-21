@@ -28,6 +28,18 @@ app.get("/getUsers/:id", async (req, res)=> {
   res.send(JSON.stringify(response));
 });
 
+app.post("/createAccount", async (req, res) => {
+  console.log(req.query);
+  // const pool = new Pool({
+  //   connectionString: process.env.DATABASE_URL,
+  //   ssl: true,
+  // });
+
+  // const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES (${accountName}, ${accountPassword}`);
+  // await pool.end();
+  // res.send(response);
+});
+
 app.get("/postal", (req, res)=> {
   res.render("pages/week9/index");
 });

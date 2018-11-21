@@ -21,8 +21,7 @@ app.get("/getUsers", (req, res)=> {
   client.connect();
   client.query('SELECT * FROM account;', (err, res) => {
     if(err) throw err;
-    res.send(JSON.stringify(res));
-    console.log(res);
+    console.log(JSON.stringify(res));
     client.end();
   });
 });

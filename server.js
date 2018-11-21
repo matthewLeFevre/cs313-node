@@ -1,14 +1,22 @@
 const express = require("express");
-// const ejs = require("ejs");
 const app = express();
+const { Pool, Client } = require('pg');
+const pool = new Pool();
 
 app.use(express.static("public"));
 
 app.set("views", "views");
 app.set('view engine', 'ejs');
 
-app.get("/home", (req, res)=> {
+app.get("/", (req, res)=> {
   res.render("pages/home");
+});
+
+app.get("/getUsers", (req, res)=> {
+  pool.query('SELECT accountName, accountCreated FROM account', (err, res) => {
+    console.log(err, res);
+    pool.end();
+  });
 });
 
 app.get("/postal", (req, res)=> {
@@ -23,7 +31,7 @@ app.get("/price", (req, res)=> {
 });
 
 app.all("*", (req, res) => {
-  res.send("<h1>404</h1> <p>Y'all made it somewhere you shouldn'ev.</p>")
+  res.send("<h1>404</h1> <p>Y'all made it somewhere you shouldn'ev blunderyly.</p>")
 });
 
 app.listen( process.env.PORT || 5000, ()=> {

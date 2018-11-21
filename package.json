@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/matthewLeFevre/cs313-node#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "pg": "^7.6.1"

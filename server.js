@@ -1,15 +1,11 @@
 const express = require("express");
 const app = express();
-const { Pool, Client } = require('pg');
-// const pool = new Pool();
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: true,
-// });
+const { Pool } = require('pg');
+const bodyParser = require("body-parser");
 
 
+app.use(bodyParser.json());
 app.use(express.static("public"));
-
 app.set("views", "views");
 app.set('view engine', 'ejs');
 
@@ -29,7 +25,7 @@ app.get("/getUsers/:id", async (req, res)=> {
 });
 
 app.post("/createAccount", async (req, res) => {
-  console.log(req.query);
+  console.log(req.body);
   // const pool = new Pool({
   //   connectionString: process.env.DATABASE_URL,
   //   ssl: true,

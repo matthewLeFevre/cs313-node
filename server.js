@@ -7,7 +7,6 @@ const client = new Client({
   ssl: true,
 });
 
-client.connect();
 
 app.use(express.static("public"));
 
@@ -19,6 +18,7 @@ app.get("/", (req, res)=> {
 });
 
 app.get("/getUsers", (req, res)=> {
+  client.connect();
   client.query('SELECT * FROM account;', (err, res) => {
     if(err) throw err;
     res.send(JSON.stringify(res));

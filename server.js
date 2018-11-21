@@ -6,12 +6,15 @@ app.use(express.static("public"));
 
 app.set("views", "views");
 app.set('view engine', 'ejs');
+
 app.get("/home", (req, res)=> {
   res.render("pages/home");
 });
+
 app.get("/postal", (req, res)=> {
   res.render("pages/week9/index");
 });
+
 app.get("/price", (req, res)=> {
   let payload = req.query;
   console.log(payload);

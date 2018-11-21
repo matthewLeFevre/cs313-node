@@ -34,7 +34,7 @@ app.post("/createAccount", async (req, res) => {
       ssl: true,
     });
   
-    const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES (${req.body.accountName}, ${req.body.accountPassword}`);
+    const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES (${req.body.accountName}, ${req.body.accountPassword};`);
     await pool.end();
     res.send(response);
   } catch (err) {

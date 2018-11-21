@@ -17,7 +17,7 @@ app.get("/", (req, res)=> {
   res.render("pages/home");
 });
 
-app.get("/getUsers", (req, res)=> {
+app.get("/getUsers", async (req, res)=> {
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: true,

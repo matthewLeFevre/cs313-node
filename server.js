@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const { Pool, Client } = require('pg');
 // const pool = new Pool();
-const client = new Client({
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
@@ -18,11 +18,11 @@ app.get("/", (req, res)=> {
 });
 
 app.get("/getUsers", (req, res)=> {
-  client.connect();
-  client.query('SELECT * FROM account;', (err, res) => {
+  pool.connect();
+  pool.query('SELECT * FROM account;', (err, res) => {
     if(err) throw err;
     console.log(JSON.stringify(res));
-    client.end();
+    pool.end();
   });
 });
 

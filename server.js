@@ -22,15 +22,9 @@ app.get("/getUsers", async (req, res)=> {
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
-  const response = await pool.query('SELECT * FROM account;');
+  const response = await pool.query('SELECT * FROM account WHERE accountId = 7;');
   await pool.end();
-  res.send(JSON.stringify(response.rows));
-  // pool.connect();
-  // pool.query('SELECT * FROM account;', (err, res) => {
-  //   if(err) throw err;
-  //   console.log(JSON.stringify(res));
-  //   pool.end();
-  // });
+  res.send(JSON.stringify(response));
 });
 
 app.get("/postal", (req, res)=> {

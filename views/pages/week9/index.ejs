@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Postal</title>
+</head>
+<body>
+  <h1>Postal app</h1>
+  <form action="/price" mehtod="POST">
+    <label for="">weight</label>
+    <input type="text" name="weight">
+    <select name="type" id="">
+      <option value="stamped">Spamped Letter</option>
+      <option value="metered">Metered Letter</option>
+      <option value="flats">Large Envelope</option>
+      <option value="package">First-Class Package</option>
+    </select>
+    <button type="submit">Calculate price</button>
+  </form>
+</body>
+</html>

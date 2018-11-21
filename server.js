@@ -3,7 +3,9 @@ const app = express();
 const { Pool } = require('pg');
 const bodyParser = require("body-parser");
 
-
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 app.set("views", "views");
@@ -26,14 +28,14 @@ app.get("/getUsers/:id", async (req, res)=> {
 
 app.post("/createAccount", async (req, res) => {
   console.log(req.body);
-  // const pool = new Pool({
-  //   connectionString: process.env.DATABASE_URL,
-  //   ssl: true,
-  // });
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
 
-  // const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES (${accountName}, ${accountPassword}`);
-  // await pool.end();
-  // res.send(response);
+  const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES (${req.body.accountName}, ${req.body.accountPassword}`);
+  await pool.end();
+  res.send(response);
 });
 
 app.get("/postal", (req, res)=> {

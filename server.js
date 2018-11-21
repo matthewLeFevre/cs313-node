@@ -45,7 +45,7 @@ app.get("/postal", (req, res)=> {
 });
 
 app.get("/price", (req, res)=> {
-  let payload = req.query;
+  let payload = [req.body.accountName, req.body.accountPassword];
   console.log(payload);
   // let payload = {type: "envelope", weight: 45};
   // res.render("pages/week9/price", payload);

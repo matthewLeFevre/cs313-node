@@ -18,12 +18,19 @@ app.get("/", (req, res)=> {
 });
 
 app.get("/getUsers", (req, res)=> {
-  pool.connect();
-  pool.query('SELECT * FROM account;', (err, res) => {
-    if(err) throw err;
-    console.log(JSON.stringify(res));
-    pool.end();
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
   });
+  const response = await pool.query('SELECT * FROM account;');
+  await pool.end();
+  res.send(response);
+  // pool.connect();
+  // pool.query('SELECT * FROM account;', (err, res) => {
+  //   if(err) throw err;
+  //   console.log(JSON.stringify(res));
+  //   pool.end();
+  // });
 });
 
 app.get("/postal", (req, res)=> {

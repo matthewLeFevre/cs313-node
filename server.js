@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const { Pool, Client } = require('pg');
 // const pool = new Pool();
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: true,
+// });
 
 
 app.use(express.static("public"));
@@ -18,10 +18,7 @@ app.get("/", (req, res)=> {
 });
 
 app.get("/getUsers", async (req, res)=> {
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-  });
+  const pool = new Pool();
   const response = await pool.query('SELECT * FROM account;');
   await pool.end();
   res.send(response);

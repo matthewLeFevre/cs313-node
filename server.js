@@ -17,12 +17,13 @@ app.get("/", (req, res)=> {
   res.render("pages/home");
 });
 
-app.get("/getUsers", async (req, res)=> {
+app.get("/getUsers/:id", async (req, res)=> {
+  let id = req.params.id;
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
-  const response = await pool.query('SELECT * FROM account WHERE accountId = 7;');
+  const response = await pool.query(`SELECT * FROM account WHERE accountId = ${id};`);
   await pool.end();
   res.send(JSON.stringify(response));
 });

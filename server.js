@@ -1,7 +1,13 @@
 const express = require("express");
 const app = express();
 const { Pool, Client } = require('pg');
-const pool = new Pool();
+// const pool = new Pool();
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+client.connect();
 
 app.use(express.static("public"));
 
@@ -13,12 +19,12 @@ app.get("/", (req, res)=> {
 });
 
 app.get("/getUsers", (req, res)=> {
-  res.send(process.env.DATABASE_URL);
-  // pool.connect();
-  // pool.query('SELECT * FROM account;', (err, res) => {
-  //   console.log(err, res);
-  //   pool.end();
-  // });
+  client.query('SELECT * FROM account;', (err, res) => {
+    if(err) throw err;
+    res.send(JSON.stringify(res));
+    console.log(res);
+    client.end();
+  });
 });
 
 app.get("/postal", (req, res)=> {

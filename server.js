@@ -23,6 +23,6 @@ app.all("*", (req, res) => {
   res.send("<h1>404</h1> <p>Y'all made it somewhere you shouldn'ev.</p>")
 });
 
-app.listen(5000, ()=> {
+app.listen( process.env.PORT || 5000, ()=> {
   console.log("running class server");
 });

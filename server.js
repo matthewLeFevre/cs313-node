@@ -13,6 +13,7 @@ app.get("/", (req, res)=> {
 });
 
 app.get("/getUsers", (req, res)=> {
+  pool.connect();
   pool.query('SELECT * FROM account;', (err, res) => {
     console.log(err, res);
     pool.end();

@@ -28,14 +28,19 @@ app.get("/getUsers/:id", async (req, res)=> {
 
 app.post("/createAccount", async (req, res) => {
   console.log(req.body);
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-  });
-
-  const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES (${req.body.accountName}, ${req.body.accountPassword}`);
-  await pool.end();
-  res.send(response);
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+  
+    const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES (${req.body.accountName}, ${req.body.accountPassword}`);
+    await pool.end();
+    res.send(response);
+  } catch (err) {
+    console.log(err);
+  }
+  
 });
 
 app.get("/postal", (req, res)=> {

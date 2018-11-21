@@ -13,12 +13,12 @@ app.get("/", (req, res)=> {
 });
 
 app.get("/getUsers", (req, res)=> {
-  console.log(process.env.DATABASE_URL);
-  pool.connect();
-  pool.query('SELECT * FROM account;', (err, res) => {
-    console.log(err, res);
-    pool.end();
-  });
+  res.send(process.env.DATABASE_URL);
+  // pool.connect();
+  // pool.query('SELECT * FROM account;', (err, res) => {
+  //   console.log(err, res);
+  //   pool.end();
+  // });
 });
 
 app.get("/postal", (req, res)=> {

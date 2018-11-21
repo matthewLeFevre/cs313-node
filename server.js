@@ -24,7 +24,7 @@ app.get("/getUsers", async (req, res)=> {
   });
   const response = await pool.query('SELECT * FROM account;');
   await pool.end();
-  res.send(response);
+  res.send(JSON.stringify(response.rows));
   // pool.connect();
   // pool.query('SELECT * FROM account;', (err, res) => {
   //   if(err) throw err;

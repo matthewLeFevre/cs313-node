@@ -26,8 +26,7 @@ exports.getAccountInfo = async function (accountName) {
     });
     const response = await pool.query(`SELECT * FROM account WHERE accountName = '${accountName}'`);
     if (response.rowCount === 1) {
-      console.log(response.rows);
-      return response.rows;
+      return response.rows[0];
     } else {
       return false;
     }

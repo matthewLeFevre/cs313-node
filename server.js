@@ -46,7 +46,7 @@ app.post("/createAccount", async (req, res) => {
 app.post("/loginAccount", async (req, res) => {
   try {
     if (accountModule.checkAccountName(req.body.accountName)) {
-      let account = accountModule.getAccountInfo(accountName);
+      let account = accountModule.getAccountInfo(req.body.accountName);
       console.log(account);
     } else {
       console.log(req);

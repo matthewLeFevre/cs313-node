@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const { Pool } = require('pg');
 const bodyParser = require("body-parser");
+const accountModule = require("./library/account_model");
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -27,7 +28,6 @@ app.get("/getUsers/:id", async (req, res)=> {
 });
 
 app.post("/createAccount", async (req, res) => {
-  console.log(req.body);
   try {
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
@@ -41,6 +41,19 @@ app.post("/createAccount", async (req, res) => {
     console.log(err);
   }
   
+});
+
+app.post("/loginAccount", async (req, res) => {
+  try {
+    if (accountModule.checkAccountName(req.body.accountName)) {
+      let account = accountModule.getAccountInfo(req);
+      console.log(account);
+    } else {
+      console.log(req);
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get("/postal", (req, res)=> {

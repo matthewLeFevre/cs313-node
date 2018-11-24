@@ -49,6 +49,8 @@ app.post("/loginAccount", async (req, res) => {
       let account = await accountModule.getAccountInfo(req.body.accountName);
       if(account.accountPassword === req.body.accountPassword) {
         res.send("<h1>User Loggedin</h1>");
+      } else {
+        res.send("<h1>User was not loggedin</h1>");
       }
     } else {
       console.log(req);

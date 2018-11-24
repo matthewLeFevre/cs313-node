@@ -19,7 +19,7 @@ exports.checkAccountName = async function(accountName) {
  
 }
 
-exports.getAccountInfo = function (accountName) {
+exports.getAccountInfo = async function (accountName) {
   try {
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,

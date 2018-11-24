@@ -19,6 +19,20 @@ exports.checkAccountName = async function(accountName) {
  
 }
 
-exports.getAccountInfo = function () {
-  return "";
+exports.getAccountInfo = function (accountName) {
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+    const response = await pool.query(`SELECT * FROM account WHERE accountName = '${accountName}'`);
+
+    if (response.rowCount === 1) {
+      return response;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.log(err)
+  }
 }

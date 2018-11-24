@@ -34,3 +34,17 @@ exports.getAccountInfo = async function (accountName) {
     console.log(err)
   }
 }
+
+exports.createAccount = async function (accountName, accountPassword) {
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+    const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES ('${accountName}', '${accountPassword}');`);
+    await pool.end();
+    return response.rowCount;
+  } catch (err) {
+    console.log(err);
+  }
+}

@@ -29,18 +29,15 @@ app.get("/getUsers/:id", async (req, res)=> {
 
 app.post("/createAccount", async (req, res) => {
   try {
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: true,
-    });
-  
-    const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES ('${req.body.accountName}', '${req.body.accountPassword}');`);
-    await pool.end();
-    res.send(response);
+    let createAccount = await accountModule.createAccount(req.body.accountName, req.body.accountPassword);
+    if (createAccount === 1) {
+      res.send("Account Created successfully please loging");
+    } else {
+      res.send("an error occured.");
+    }
   } catch (err) {
     console.log(err);
   }
-  
 });
 
 app.post("/loginAccount", async (req, res) => {

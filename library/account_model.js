@@ -6,7 +6,7 @@ exports.checkAccountName = async function(accountName) {
       connectionString: process.env.DATABASE_URL,
       ssl: true,
     });
-    const response = await pool.query(`SELECT accontName FROM account WHERE accountName = ${accountName}`);
+    const response = await pool.query(`SELECT account.accontName FROM account WHERE account.accountName = ${accountName}`);
     console.log(response);
     if (response.rowCount === 1) {
       return true;

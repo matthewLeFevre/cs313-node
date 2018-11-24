@@ -46,7 +46,8 @@ app.post("/createAccount", async (req, res) => {
 app.post("/loginAccount", async (req, res) => {
   try {
     if (accountModule.checkAccountName(req.body.accountName)) {
-      let account = await accountModule.getAccountInfo(req.body.accountName);
+      let account = await accountModule.getAccountInfo(req.body.accountName).then(data => {return data;});
+      console.log(account);
       console.log(account.accountPassword, req.body.accountPassword);
       if(account.accountPassword === req.body.accountPassword) {
         res.send(JSON.stringify(account));

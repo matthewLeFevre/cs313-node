@@ -105,6 +105,7 @@ app.post("/createParty", async (req, res) => {
     console.log(err);
   }
 });
+
 app.post("/addAccountToParty", async (req, res) => {
   let accountId = req.body.accountId,
       partyId = req.body.partyId;
@@ -115,6 +116,7 @@ app.post("/addAccountToParty", async (req, res) => {
     res.send("Account did not add successfully");
   }
 });
+
 app.post("/deleteParty", async (req, res) => {})
 app.post("/createDispatch", async (req, res) => {})
 app.post("/deleteDispatch", async (req, res) => {})

@@ -92,6 +92,7 @@ app.post("/createParty", async (req, res) => {
     }
     let createParty = await partyModule.createParty(partyInfo);
     if(createParty.rowCount === 1) {
+      console.log(createParty.rows[0]);
       let addAccountToParty = await partyModule.addAccountToParty(req.body.accountId, createParty.rows[0].partyId);
       if (addAccountToParty) {
         res.send(await partyModule.getPartiesByAccountId(req.body.accountId));

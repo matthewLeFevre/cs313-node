@@ -76,7 +76,9 @@ exports.addAccountToParty = async (accountId, partyId) => {
       ssl: true,
     });
     const query = await pool.query(`INSERT INTO account_in_party
-                                    (accountId, partyId) VALUES (${accountId}, ${partyId})`);
+                                    (accountId, partyId) 
+                                    VALUES (${accountId}, ${partyId})`);
+    console.log(query);
     if (query.rowCount === 1) {
       return true;
     } else {

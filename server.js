@@ -34,7 +34,7 @@ app.get("/accounts", async (req, res) => {
 app.post("/createAccount", async (req, res) => {
   try {
     let createAccount = await accountModule.createAccount(req.body.accountName, req.body.accountPassword);
-    console.log(createAccount.rows);
+    console.log(createAccount);
     if (createAccount.rowCount === 1) {
       res.send("Account Created successfully please loging");
     } else {

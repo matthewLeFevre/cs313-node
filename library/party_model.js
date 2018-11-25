@@ -68,3 +68,56 @@ exports.getAccountsByParty = async (id) => {
     console.log(err);
   }
 }
+
+exports.addAccountToParty = async (accountId, partyId) => {
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+    const query = await pool.query(`INSERT INTO account_in_party
+                                    (accountId, partyId) VALUES (${accountId}, ${partyId})`);
+    if (query.rowCount === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+exports.createParty = async (partyInfo) => {
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+    const query = await pool.query(`INSERT INTO party
+                                    (accountId, partyName) VALUES (${partyInfo.accountId}, ${partyInfo.partyName})
+                                    RETURNING partyId`);
+    if (query.rowCount === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+exports.deleteParty = async (partyId) => {
+  try {} catch (err) {
+    console.log(err);
+  }
+}
+exports.deleteDispatch = async (partyInfo) => {
+  try {} catch (err) {
+    console.log(err);
+  }
+}
+exports.createDispatch = async (partyInfo) => {
+  try {} catch (err) {
+    console.log(err);
+  }
+}

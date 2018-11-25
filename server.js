@@ -84,22 +84,35 @@ app.get("/accountsByParty/:partyId", async (req, res) => {
   res.send(accounts);
 });
 
-app.post("/createParty", async (req, res) => {});
-app.post("/addUserToParty", async (req, res) => {
-  let partyInfo = {
-    partyName : req.body.partyName ? req.body.partyName : `${await partyModule.getAccount(req.body.accountId).accountName}'s Party`,
-    accountId : req.body.accountId,
-  }
-  let createParty = await partyModule.createParty(partyInfo);
-  if(createPary.rowCount === 1) {
-    let addAccountToParty = await partyModule.addAccountToParty(req.body.accountId, createParty.rows[0].partyId);
-    if (addAccountToParty === 1) {
-      res.send(await partyModule.getPartiesByAccountId(req.body.accountId));
-    } else {
-      res.send("party created but user was not added.");
+app.post("/createParty", async (req, res) => {
+  try {
+    let partyInfo = {
+      partyName : req.body.partyName ? req.body.partyName : `${await partyModule.getAccount(req.body.accountId).accountName}'s Party`,
+      accountId : req.body.accountId,
     }
+    let createParty = await partyModule.createParty(partyInfo);
+    if(createPary.rowCount === 1) {
+      let addAccountToParty = await partyModule.addAccountToParty(req.body.accountId, createParty.rows[0].partyId);
+      if (addAccountToParty === 1) {
+        res.send(await partyModule.getPartiesByAccountId(req.body.accountId));
+      } else {
+        res.send("party created but user was not added.");
+      }
+    } else {
+      res.send( "creating party failed");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+app.post("/addAccountToParty", async (req, res) => {
+  let accountId = req.body.accountId,
+      partyId = req.body.partyId;
+  let addAccountToParty = partyModule.addAccountToParty(accountId, partyId);
+  if(addAccountToParty) {
+    res.send("Account added successfully");
   } else {
-    res.send( "creating party failed");
+    res.send("Account did not add successfully");
   }
 });
 app.post("/deleteParty", async (req, res) => {})

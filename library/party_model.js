@@ -57,7 +57,7 @@ exports.getAccountsByParty = async (id) => {
                                     INNER JOIN account_in_party AS ap
                                     ON p.partyId = ap.partyId
                                     INNER JOIN account AS a
-                                    ON p.accountId = a.accountId
+                                    ON ap.accountId = a.accountId
                                     WHERE p.partyId = ${id}`);
     if (query.rowCount >= 1) {
       return query.rows;

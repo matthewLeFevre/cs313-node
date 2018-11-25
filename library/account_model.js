@@ -49,12 +49,22 @@ exports.createAccount = async function (accountName, accountPassword) {
   }
 }
 
-exports.getAccount = async function (accondId) {
+exports.getAccount = async function (accountId) {
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
-  const response = await pool.query(`SELECT * FROM account WHERE accountId = ${id};`);
+  const response = await pool.query(`SELECT * FROM account WHERE accountId = ${accountId};`);
+  await pool.end();
+  return JSON.stringify(response);
+}
+
+exports.getAccounts = async function () {
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+  const response = await pool.query(`SELECT * FROM account;`);
   await pool.end();
   return JSON.stringify(response);
 }

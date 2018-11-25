@@ -53,12 +53,12 @@ exports.getAccountsByParty = async (id) => {
       ssl: true,
     });
     const query = await pool.query(`SELECT a.accountId, a.accountName 
-                                    FROM party
-                                    LEFT JOIN account_in_party AS ap
-                                    ON party.partyId = ap.partyId
-                                    RIGHT JOIN account AS a
-                                    ON party.accountId = a.accountId
-                                    WHERE party.partyId = ${id}`);
+                                    FROM party AS p
+                                    INNER JOIN account_in_party AS ap
+                                    ON p.partyId = ap.partyId
+                                    INNER JOIN account AS a
+                                    ON p.accountId = a.accountId
+                                    WHERE p.partyId = ${id}`);
     if (query.rowCount >= 1) {
       return query.rows;
     } else {

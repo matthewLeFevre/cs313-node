@@ -41,7 +41,7 @@ exports.createAccount = async function (accountName, accountPassword) {
       connectionString: process.env.DATABASE_URL,
       ssl: true,
     });
-    const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES ('${accountName}', '${accountPassword}');`);
+    const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES ('${accountName}', '${accountPassword}') RETURNING accountId;`);
     await pool.end();
     return response;
   } catch (err) {

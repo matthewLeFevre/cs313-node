@@ -6,7 +6,7 @@ exports.getPartiesByAccountId =  async (id) => {
       connectionString: process.env.DATABASE_URL,
       ssl: true,
     });
-    const query = await pool.query(`SELECT party.*, dispatch.*, account.* 
+    const query = await pool.query(`SELECT party.*, dispatch.*, a.* 
                                     FROM account AS a
                                     LEFT JOIN account_in_party AS ap
                                     ON a.accountId = ap.accountId 

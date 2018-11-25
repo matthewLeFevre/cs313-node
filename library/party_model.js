@@ -95,12 +95,8 @@ exports.createParty = async (partyInfo) => {
     });
     const query = await pool.query(`INSERT INTO party
                                     (accountId, partyName) VALUES (${partyInfo.accountId}, ${partyInfo.partyName})
-                                    RETURNING partyId`);
-    if (query.rowCount === 1) {
-      return true;
-    } else {
-      return false;
-    }
+                                    RETURNING party.partyId`);
+  return query;
   } catch (err) {
     console.log(err);
   }

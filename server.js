@@ -87,8 +87,8 @@ app.get("/accountsByParty/:partyId", async (req, res) => {
 app.post("/createParty", async (req, res) => {});
 app.post("/addUserToParty", async (req, res) => {
   let partyInfo = {
-    partyName = req.body.partyName ? req.body.partyName : `${await partyModule.getAccount(req.body.accountId).accountName}'s Party`,
-    accountId = req.body.accountId,
+    partyName : req.body.partyName ? req.body.partyName : `${await partyModule.getAccount(req.body.accountId).accountName}'s Party`,
+    accountId : req.body.accountId,
   }
   let createParty = await partyModule.createParty(partyInfo);
   if(createPary.rowCount === 1) {

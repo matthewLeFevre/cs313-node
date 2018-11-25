@@ -34,7 +34,8 @@ app.get("/accounts", async (req, res) => {
 app.post("/createAccount", async (req, res) => {
   try {
     let createAccount = await accountModule.createAccount(req.body.accountName, req.body.accountPassword);
-    if (createAccount === 1) {
+    console.log(createAccount.rows);
+    if (createAccount.rowCount === 1) {
       res.send("Account Created successfully please loging");
     } else {
       res.send("an error occured.");
@@ -84,7 +85,23 @@ app.get("/accountsByParty/:partyId", async (req, res) => {
 });
 
 app.post("/createParty", async (req, res) => {});
-app.post("/addUserToParty", async (req, res) => {})
+app.post("/addUserToParty", async (req, res) => {
+  let partyInfo = {
+    partyName = req.body.partyName ? req.body.partyName : `${await partyModule.getAccount(req.body.accountId).accountName}'s Party`,
+    accountId = req.body.accountId,
+  }
+  let createParty = await partyModule.createParty(partyInfo);
+  if(createPary.rowCount === 1) {
+    let addAccountToParty = await partyModule.addAccountToParty(req.body.accountId, createParty.rows[0].partyId);
+    if (addAccountToParty === 1) {
+      res.send(await partyModule.getPartiesByAccountId(req.body.accountId));
+    } else {
+      res.send("party created but user was not added.");
+    }
+  } else {
+    res.send( "creating party failed");
+  }
+});
 app.post("/deleteParty", async (req, res) => {})
 app.post("/createDispatch", async (req, res) => {})
 app.post("/deleteDispatch", async (req, res) => {})

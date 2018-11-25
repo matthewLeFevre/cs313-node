@@ -43,7 +43,7 @@ exports.createAccount = async function (accountName, accountPassword) {
     });
     const response = await pool.query(`INSERT INTO account ( accountName, accountPassword ) VALUES ('${accountName}', '${accountPassword}');`);
     await pool.end();
-    return response.rowCount;
+    return response;
   } catch (err) {
     console.log(err);
   }

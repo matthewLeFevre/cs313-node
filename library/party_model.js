@@ -94,7 +94,7 @@ exports.createParty = async (partyInfo) => {
       ssl: true,
     });
     const query = await pool.query(`INSERT INTO party
-                                    (accountId, partyName) VALUES (${partyInfo.accountId}, ${partyInfo.partyName})
+                                    (accountId, partyName) VALUES (${partyInfo.accountId}, '${partyInfo.partyName}')
                                     RETURNING party.partyId`);
   return query;
   } catch (err) {

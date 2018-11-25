@@ -15,7 +15,7 @@ exports.getPartiesByAccountId =  async (id) => {
     //                                 RIGHT JOIN dispatch
     //                                 ON party.partyId = dispatch.partyId
     //                                 WHERE a.accountId = ${id}`);
-    const query = await pool.query(`SELECT a.*, party.* 
+    const query = await pool.query(`SELECT a.*, p.* 
                                     FROM account AS a
                                     LEFT JOIN account_in_party AS ap
                                     ON a.accountId = ap.accountId 
@@ -38,7 +38,13 @@ exports.getDispatchesByParty = async (id) => {
       connectionString: process.env.DATABASE_URL,
       ssl: true,
     });
-    const query = await pool.query(``);
+    const query = await pool.query(`SELECT d.*, a.accountName, a.accountId 
+                                    FROM party 
+                                    LEFT JOIN dispatch AS d
+                                    ON party.partyId = d.partyId
+                                    LEFT JOIN account AS a
+                                    ON d.accountId = a.accountId
+                                    WHERE party.partyId = ${id}`);
     if (query.rowCount === 1) {
       return Response.rows;
     } else {

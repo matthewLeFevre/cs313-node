@@ -48,3 +48,13 @@ exports.createAccount = async function (accountName, accountPassword) {
     console.log(err);
   }
 }
+
+exports.getAccount = async function (accondId) {
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+  const response = await pool.query(`SELECT * FROM account WHERE accountId = ${id};`);
+  await pool.end();
+  return JSON.stringify(response);
+}

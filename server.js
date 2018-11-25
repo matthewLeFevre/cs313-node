@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const { Pool } = require('pg');
 const bodyParser = require("body-parser");
 const accountModule = require("./library/account_model");
+const partyModule = require("./library/party_model");
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -16,15 +16,19 @@ app.get("/", (req, res)=> {
   res.render("pages/home");
 });
 
-app.get("/getUsers/:id", async (req, res)=> {
+
+// user account routes 
+// Need to fileter and check inputs
+
+app.get("/getAccount/:id", async (req, res) => {
   let id = req.params.id;
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-  });
-  const response = await pool.query(`SELECT * FROM account WHERE accountId = ${id};`);
-  await pool.end();
-  res.send(JSON.stringify(response));
+  let account = await accountModule.getAccount(id);
+  res.send(account);
+});
+
+app.get("/accounts", async (req, res) => {
+  let accounts = await accountModule.getAccounts();
+  res.send(accounts);
 });
 
 app.post("/createAccount", async (req, res) => {
@@ -59,16 +63,31 @@ app.post("/loginAccount", async (req, res) => {
   }
 });
 
-app.get("/postal", (req, res)=> {
-  res.render("pages/week9/index");
+// messaging routes
+
+app.get("/partiesByAccount/:accountId", async (req, res) => {
+  let id = req.params.accountId;
+  let partys = await partyModule.getPartiesByAccountId(id);
+  res.send(account);
 });
 
-app.get("/price", (req, res)=> {
-  let payload = [req.body.accountName, req.body.accountPassword];
-  console.log(payload);
-  // let payload = {type: "envelope", weight: 45};
-  // res.render("pages/week9/price", payload);
+app.get("/dispatchesByParty/:partyId", async (req, res) => {
+  let id = req.params.partyId;
+  let dispatches = await partyModule.getDispatchesByParty(id);
+  res.send(dispatches);
 });
+
+app.get("/accountsByParty/:partyId", async (req, res) => {
+  let id = req.params.partyId;
+  let accounts = await partyModule.getAccountsByParty(id);
+  res.send(accounts);
+});
+
+app.post("/createParty", async (req, res) => {});
+app.post("/addUserToParty", async (req, res) => {})
+app.post("/deleteParty", async (req, res) => {})
+app.post("/createDispatch", async (req, res) => {})
+app.post("/deleteDispatch", async (req, res) => {})
 
 app.all("*", (req, res) => {
   res.send("<h1>404</h1> <p>Y'all made it somewhere you shouldn'ev blunderyly.</p>")

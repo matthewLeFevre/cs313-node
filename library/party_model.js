@@ -56,7 +56,7 @@ exports.getAccountsByParty = async (id) => {
                                     FROM party
                                     LEFT JOIN account_in_party AS ap
                                     ON party.partyId = ap.partyId
-                                    LEFT JOIN account AS a
+                                    RIGHT JOIN account AS a
                                     ON party.accountId = a.accountId
                                     WHERE party.partyId = ${id}`);
     if (query.rowCount >= 1) {

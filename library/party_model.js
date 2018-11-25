@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-exports.getPartiesByAccountId = (id) => {
+exports.getPartiesByAccountId =  async (id) => {
   try {
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
@@ -25,7 +25,7 @@ exports.getPartiesByAccountId = (id) => {
   }
 }
 
-exports.getDispatchesByParty = (id) => {
+exports.getDispatchesByParty = async (id) => {
   try {
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
@@ -42,7 +42,7 @@ exports.getDispatchesByParty = (id) => {
   }
 }
 
-exports.getAccountsByParty = (id) => {
+exports.getAccountsByParty = async (id) => {
   try {
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,

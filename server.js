@@ -125,7 +125,7 @@ app.post("/deleteDispatch", async (req, res) => {})
 
 app.all("*", (req, res) => {
   // res.send("<h1>404</h1> <p>Y'all made it somewhere you shouldn'ev blunderyly.</p>")
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  res.sendFile(path.join(__dirname+'/wave-length/build/index.html'));
 });
 
 app.listen( process.env.PORT || 5000, ()=> {

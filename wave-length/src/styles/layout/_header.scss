@@ -1,0 +1,31 @@
+.header {
+  @include flex(row, nowrap, space-between, center);
+  background-color: $theme-black;
+  color: $theme-yellow;
+  height: 60px;
+}
+
+.nav {
+  height: 60px;
+  padding: 0 2em;
+}
+
+.nav__list {
+  @include flex(row, nowrap, space-between, center);
+  height: 60px;
+  list-style: none;;
+}
+
+.nav__item {
+  height: 60px;
+}
+
+.nav__link {
+  @include flex(row, nowrap, center, center);
+  height: 60px;
+  color: $theme-yellow;
+  padding: 0 1em;
+  text-decoration: none;
+  weight: 700;
+}
+

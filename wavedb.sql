@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS account;
 DROP TYPE IF EXISTS state;
 
 CREATE TYPE state AS ENUM ('online', 'away');
+CREATE TYPE level AS ENUM ('user', 'admin');
 CREATE TABLE account (
   accountId SERIAL NOT NULL,
   accountName VARCHAR(45) NOT NULL,
@@ -13,6 +14,7 @@ CREATE TABLE account (
   accountPassword VARCHAR(255) NOT NULL,
   accountCreated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   accountActive TIMESTAMP NULL,
+  accountLevel level NOT NULL DEFAULT 'user',
   PRIMARY KEY (accountId)
 );
 

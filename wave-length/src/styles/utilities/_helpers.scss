@@ -1,0 +1,51 @@
+// Helper classes
+
+.rounded {
+  border-radius: $br-01;
+}
+
+.bold {
+  font-weight: $bold;
+}
+
+.extra-bold {
+  font-weight: $extra-bold;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.shadow {
+  box-shadow: $box-shadow1;
+}
+
+$directions: "left" "right" "top" "bottom" "all";
+
+.spacing {
+  @each $direction in $directions {
+    @if $direction != "all" {
+      &--#{$direction} {
+        $spacers: 10;
+        $spaces: 1;
+        @while $spaces <= $spacers {
+          &--#{$spaces} {
+            margin-#{$direction}: $spaces + rem !important;
+          }
+          $spaces: $spaces + 1;
+        }
+      }
+    } @else {
+      $spacers: 10;
+      $spaces: 1;
+      @while $spaces <= $spacers {
+        &--#{$spaces} {
+          margin: $spaces + rem !important;
+        }
+        $spaces: $spaces + 1;
+      }
+    }
+    
+  }
+}
+

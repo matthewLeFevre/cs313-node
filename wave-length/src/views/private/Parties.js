@@ -9,6 +9,7 @@ class Parties extends React.Component {
   }
 
   componentDidMount () {
+    console.log('mounting parties');
     fetch(`/partiesByAccount/${this.props.accountInfo.accountId}`)
     .then(res => res.json())
     .thnen(res => {

@@ -3,7 +3,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const accountModule = require("./library/account_model");
 const partyModule = require("./library/party_model");
+const path = require('path');
 
+app.use(express.static(path.join(__dirname, 'wave-length/build')));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -12,9 +14,9 @@ app.use(express.static("public"));
 app.set("views", "views");
 app.set('view engine', 'ejs');
 
-app.get("/", (req, res)=> {
-  res.render("pages/home");
-});
+// app.get("/", (req, res)=> {
+//   res.render("pages/home");
+// });
 
 
 // user account routes 
@@ -122,7 +124,8 @@ app.post("/createDispatch", async (req, res) => {})
 app.post("/deleteDispatch", async (req, res) => {})
 
 app.all("*", (req, res) => {
-  res.send("<h1>404</h1> <p>Y'all made it somewhere you shouldn'ev blunderyly.</p>")
+  // res.send("<h1>404</h1> <p>Y'all made it somewhere you shouldn'ev blunderyly.</p>")
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 app.listen( process.env.PORT || 5000, ()=> {

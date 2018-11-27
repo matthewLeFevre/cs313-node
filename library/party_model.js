@@ -105,17 +105,37 @@ exports.createParty = async (partyInfo) => {
 }
 
 exports.deleteParty = async (partyId) => {
-  try {} catch (err) {
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+    const query = await pool.query(`DELETE FROM party WHERE partyId = ${partyId};`);
+    return query;
+  } catch (err) {
     console.log(err);
   }
 }
-exports.deleteDispatch = async (partyInfo) => {
-  try {} catch (err) {
+exports.deleteDispatch = async (dispatchId) => {
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+    const query = await pool.query(`DELETE FROM dispatch WHERE dispatchId = ${dispatchId};`);
+  } catch (err) {
     console.log(err);
   }
 }
-exports.createDispatch = async (partyInfo) => {
-  try {} catch (err) {
+exports.createDispatch = async (dispatchInfo) => {
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+    const query = await pool.query(`INSERT INTO dispatch (accountId, partyId, dispatchText) VALUES (${dispatchInfo.accountId}, ${dispatchInfo.partyInfo}, ${dispatchInfo.dispatchText});`);
+    return query;
+  } catch (err) {
     console.log(err);
   }
 }

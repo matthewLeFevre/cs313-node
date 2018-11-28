@@ -11,14 +11,17 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {};
   } 
+  componentDidMount() {
+    console.log("mounted dashbaord");
+  }
   render () {
     return (
       <div id="Dashbaord">
         <Switch>
-          <Route path="/parties" render={(props) => <Parties {...props} />} />
-          <Route path="/dispatch" render={(props) => <Dispatch {...props} />} />
-          <Route path="/settings" render={(props) => <Settings {...props} />} />
-          <Route path="/admin" render={(props) => 
+          <Route path="/dashboard/parties" render={(props) => <Parties accountInfo={this.props.accountInfo} {...props} />} />
+          <Route path="/dashboard/dispatch" render={(props) => <Dispatch {...props} />} />
+          <Route path="/dashboard/settings" render={(props) => <Settings {...props} />} />
+          <Route path="/dashboard/admin" render={(props) => 
             this.state.isAdmin
             ? <Admin {...props} />
             : <Redirect to="/login" />

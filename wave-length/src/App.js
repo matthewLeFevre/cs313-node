@@ -32,12 +32,12 @@ class App extends Component {
         <div>
           <Header accountInfo={this.state.accountInfo} logout={this.logout}/>
           <Switch>
-            <Route path="/" component={Home} />
+            <Route path="/" exact={true}  component={Home} />
             <Route path="/home" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/login" component={Login} />
             <Route path="/singup" component={Signup} />
-            <Route path="" render={(props) => <Dashboard {...props}/>} />
+            <Route path="/dashboard" render={(props) => <Dashboard accountInfo={this.state.accountInfo} {...props}/>} />
           </Switch>
           <Footer />
         </div>

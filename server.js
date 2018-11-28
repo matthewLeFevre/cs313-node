@@ -71,7 +71,7 @@ app.post("/loginAccount", async (req, res) => {
 app.get("/partiesByAccount/:accountId", async (req, res) => {
   let id = req.params.accountId;
   let parties = await partyModule.getPartiesByAccountId(id);
-  res.send(parties);
+  res.send({data: parties});
 });
 
 app.get("/dispatchesByParty/:partyId", async (req, res) => {

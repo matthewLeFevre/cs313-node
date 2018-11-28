@@ -25,7 +25,7 @@ class Parties extends React.Component {
         <ul>
           {this.state.parties.map( party => {
             return (
-              <li>{party.partyName}</li>
+              <li>{party.partyname}</li>
             );
           })}
         </ul>

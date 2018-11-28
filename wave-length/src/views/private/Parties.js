@@ -13,6 +13,7 @@ class Parties extends React.Component {
     fetch(`/partiesByAccount/${this.props.accountInfo.accountId}`)
     .then(res => res.json())
     .then(res => {
+      console.log(res);
       this.setState({
         parties: res.data,
       })

@@ -1,0 +1,33 @@
+.party__list {
+  list-style: none;
+}
+
+.party__item {}
+.party__link {
+  @include flex(row, nowrap, flex-start, center);
+  @include transition(color);
+  height: 40px;
+  width: 100%;
+  padding-left: 2em;
+  cursor: pointer;
+  color: $light;
+  font-weight: 700;
+  text-decoration: none;
+  background-color: $theme-grey;
+  border-bottom: $theme-black .25em solid;
+
+  &:hover {
+    color: $theme-blue;
+  }
+
+  &.active {
+    color: $theme-blue;
+  }
+}
+
+.party__add-btn {
+  margin: .25em 1em;
+  width: 80%;
+  display: inline-block;
+  text-align: center;
+}

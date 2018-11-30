@@ -88,3 +88,7 @@
 .page__full--min {
   min-height: 100vh;
 }
+
+.page__full--header {
+  min-height: calc(100vh - 60px);
+}

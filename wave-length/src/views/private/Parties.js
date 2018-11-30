@@ -1,34 +1,24 @@
 import React from 'react';
+import {NavLink, Route} from 'react-router-dom';
+import Party from './Party';
 
 class Parties extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      parties: [],
-    }
-  }
-
-  componentDidMount () {
-    console.log('mounting parties');
-    fetch(`/partiesByAccount/${this.props.accountInfo.accountId}`)
-    .then(res => res.json())
-    .then(res => {
-      console.log(res);
-      this.setState({
-        parties: res.data,
-      })
-    })
   }
   render () {
     return (
-      <div>
-        <ul>
-          {this.state.parties.map( party => {
+      <div className="grid page__full--header">
+        <ul className="party__list col--lrg--2 col--mdm--3 col--4 bg-theme-black">
+          {this.props.parties.map( (party, index) => {
             return (
-              <li>{party.partyname}</li>
+              <li className="party__item" key={index}>
+                <NavLink activeClassName="party__link active" to={`/dashboard/parties/${party.partyid}`} className="party__link ">{party.partyname}</NavLink></li>
             );
           })}
+          <li className="party__add-btn btn action">New Party</li>
         </ul>
+        <Route path="/dashboard/parties/:partyid" render={(props) => <Party accountInfo={this.props.accountInfo} {...props} />} />
       </div>
     );
   }

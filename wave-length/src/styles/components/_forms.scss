@@ -129,6 +129,17 @@
   &.breath {
     margin: 0.25em 0;
   }
+  &.btn-pair {
+    border-radius: $br-02 0 0 $br-02;
+    padding: .75em;
+  }
+}
+
+// only works as a div inside of a fieldset
+// cannot be placed on the parent fieldset becuase
+// fieldsets do not work with flex
+.field--btn-pair {
+  @include flex(row, nowrap, flex-start, center);
 }
 
 .input--checkbox {

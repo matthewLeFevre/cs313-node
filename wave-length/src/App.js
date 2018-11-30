@@ -16,7 +16,7 @@ class App extends Component {
     this.state = {
       accountInfo: {
         accountLoggedIn: true,
-        accountLevel: 'admin',
+        accountLevel: 'user',
         accountId: 1,
       }
     }

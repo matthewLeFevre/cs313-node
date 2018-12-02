@@ -8,23 +8,23 @@ class Party extends React.Component {
     };
   }
   componentDidMount() {
-    // fetch(`/dispatchesByParty/${this.props.match.params.partyid}`)
-    // .then(res => res.json())
-    // .then(res => {
-    //   console.log(res);
-    //   this.setState({
-    //     dispatches: res.data,
-    //   })
-    // })
-    // console.log("mounted party")
-    this.setState({
-      dispatches: [
-        {dispatchtext: "hello how are you today?", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
-        {dispatchtext: "I am doing well how are you?", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
-        {dispatchtext: "It was a bit snowy today.", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
-        {dispatchtext: "I enjoyed going to the movies last night.", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
-      ],
-    });
+    fetch(`/dispatchesByParty/${this.props.match.params.partyid}`)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      this.setState({
+        dispatches: res.data,
+      })
+    })
+    console.log("mounted party")
+    // this.setState({
+    //   dispatches: [
+    //     {dispatchtext: "hello how are you today?", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
+    //     {dispatchtext: "I am doing well how are you?", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
+    //     {dispatchtext: "It was a bit snowy today.", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
+    //     {dispatchtext: "I enjoyed going to the movies last night.", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
+    //   ],
+    // });
   }
   render() {
     return (

@@ -14,20 +14,20 @@ class Dashboard extends React.Component {
     };
   } 
   componentDidMount() {
-    // fetch(`/partiesByAccount/${this.props.accountInfo.accountId}`)
-    // .then(res => res.json())
-    // .then(res => {
-    //   console.log(res);
-    //   this.setState({parties: res.data});
-    // })
-    this.setState({
-      parties: [
-        {partyid: 1, partyname: "joll's party", partycreated: new Date(), accountId: 5},
-        {partyid: 2, partyname: "matt's party", partycreated: new Date(), accountId: 4},
-        {partyid: 3, partyname: "amy's party", partycreated: new Date(), accountId: 2},
-        {partyid: 4, partyname: "rachel's party", partycreated: new Date(), accountId: 3},
-      ]
-    });
+    fetch(`/partiesByAccount/${this.props.accountInfo.accountId}`)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      this.setState({parties: res.data});
+    })
+    // this.setState({
+    //   parties: [
+    //     {partyid: 1, partyname: "joll's party", partycreated: new Date(), accountId: 5},
+    //     {partyid: 2, partyname: "matt's party", partycreated: new Date(), accountId: 4},
+    //     {partyid: 3, partyname: "amy's party", partycreated: new Date(), accountId: 2},
+    //     {partyid: 4, partyname: "rachel's party", partycreated: new Date(), accountId: 3},
+    //   ]
+    // });
   }
 
   updateParties(parties) {

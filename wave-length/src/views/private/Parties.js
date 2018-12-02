@@ -8,6 +8,7 @@ class Parties extends React.Component {
     super(props);
     this.newParty = this.newParty.bind(this);
     this.createParty = this.createParty.bind(this);
+    this.handlePartyName = this.handlePartyName.bind(this);
     this.state ={
       toggleNewParty: false,
       partyName: '',

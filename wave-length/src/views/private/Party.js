@@ -51,12 +51,13 @@ export default Party;
 
 const Dispatch = (props) => {
   let display = "dispatch";
+  let date = new Date(props.dispatch.dispatchcreated);
   if(props.dispatch.accountid === props.accountInfo.accountid) {
     display = "dispatch self";
   }
   return (
     <div className={display}>
-      <p className="dispatch__account">{props.dispatch.accountname} <span className="dispatch__time">{props.dispatch.dispatchcreated.toDateString()}</span></p>
+      <p className="dispatch__account">{props.dispatch.accountname} <span className="dispatch__time">{date.toDateString()}</span></p>
       <p className="dispatch__message">{props.dispatch.dispatchtext}</p>
     </div>
   );

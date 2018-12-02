@@ -14,12 +14,12 @@ class Dashboard extends React.Component {
     };
   } 
   componentDidMount() {
-    fetch(`/partiesByAccount/${this.props.accountInfo.accountId}`)
+    fetch(`/partiesByAccount/${this.props.accountInfo.accountid}`)
     .then(res => res.json())
     .then(res => {
       console.log(res);
       this.setState({parties: res.data});
-    })
+    });
     // this.setState({
     //   parties: [
     //     {partyid: 1, partyname: "joll's party", partycreated: new Date(), accountId: 5},

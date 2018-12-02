@@ -88,6 +88,7 @@ app.get("/accountsByParty/:partyId", async (req, res) => {
 
 app.post("/createParty", async (req, res) => {
   try {
+    console.log(req.body);
     let partyInfo = {
       partyName : req.body.partyName ? req.body.partyName : `${await accountModule.getAccount(req.body.accountId).accountName}'s Party`,
       accountId : req.body.accountId,

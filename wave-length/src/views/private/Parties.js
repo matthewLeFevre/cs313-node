@@ -17,7 +17,7 @@ class Parties extends React.Component {
   createParty() {
     let body = {
       partyName: this.state.partyName,
-      accountId: this.props.accountInfo.accountId,
+      accountId: this.props.accountInfo.accountid,
     }
     let req = Globals.createRequestBody(body);
     fetch('/createParty', req)

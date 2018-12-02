@@ -56,6 +56,7 @@ class Globals {
   }
 
   static createRequestBody(body) {
+    console.log(body);
     let req = {
       method: 'POST',
       headers: {

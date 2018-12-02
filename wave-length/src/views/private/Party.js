@@ -8,23 +8,23 @@ class Party extends React.Component {
     };
   }
   componentDidMount() {
-    fetch(`/dispatchesByParty/${this.props.match.params.partyid}`)
-    .then(res => res.json())
-    .then(res => {
-      console.log(res);
-      this.setState({
-        dispatches: res.data,
-      })
-    })
+    // fetch(`/dispatchesByParty/${this.props.match.params.partyid}`)
+    // .then(res => res.json())
+    // .then(res => {
+    //   console.log(res);
+    //   this.setState({
+    //     dispatches: res.data,
+    //   })
+    // })
     // console.log("mounted party")
-    // this.setState({
-    //   dispatches: [
-    //     {dispatchText: "hello how are you today?", accountId: 2, accountName: "Jol"},
-    //     {dispatchText: "I am doing well how are you?", accountId: 1, accountName: "Matt"},
-    //     {dispatchText: "It was a bit snowy today.", accountId: 2, accountName: "Jol"},
-    //     {dispatchText: "I enjoyed going to the movies last night.", accountId: 1, accountName: "Matt"},
-    //   ],
-    // });
+    this.setState({
+      dispatches: [
+        {dispatchtext: "hello how are you today?", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
+        {dispatchtext: "I am doing well how are you?", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
+        {dispatchtext: "It was a bit snowy today.", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
+        {dispatchtext: "I enjoyed going to the movies last night.", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
+      ],
+    });
   }
   render() {
     return (
@@ -51,10 +51,13 @@ export default Party;
 
 const Dispatch = (props) => {
   let display = "dispatch";
-  if(props.dispatch.accountId === props.accountInfo.accountId) {
+  if(props.dispatch.accountid === props.accountInfo.accountid) {
     display = "dispatch self";
   }
   return (
-    <div className={display}>{props.dispatch.dispatchText}</div>
+    <div className={display}>
+      <p className="dispatch__account">{props.dispatch.accountname} <span className="dispatch__time">{props.dispatch.dispatchcreated.toDateString()}</span></p>
+      <p className="dispatch__message">{props.dispatch.dispatchtext}</p>
+    </div>
   );
 };

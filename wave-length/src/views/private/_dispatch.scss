@@ -5,8 +5,6 @@
   min-height: calc(100% - 6em);
 }
 .dispatch {
-  display: flex;
-  
   border-radius: $br-02;
   background-color: $light;
   color: $theme-black;
@@ -21,6 +19,15 @@
     margin-bottom: 3em;
   }
 }
-.dispatch__account {}
-.dispatch__message {}
-.dispatch__time {}
+.dispatch__account {
+  font-size: $sml;
+  font-weight: 700;
+}
+.dispatch__time {
+  font-size: $tiny;
+  font-weight: 500;
+  color: $grey;
+}
+.dispatch__message {
+  font-size: $main;
+}

@@ -96,7 +96,7 @@ app.post("/createParty", async (req, res) => {
     if(createParty.rowCount === 1) {
       let addAccountToParty = await partyModule.addAccountToParty(req.body.accountId, createParty.rows[0].partyid);
       if (addAccountToParty) {
-        res.send(await partyModule.getPartiesByAccountId(req.body.accountId));
+        res.send({data: await partyModule.getPartiesByAccountId(req.body.accountId)});
       } else {
         res.send("party created but user was not added.");
       }

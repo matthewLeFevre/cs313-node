@@ -1,0 +1,22 @@
+.model__container {
+  @include flex(row, nowrap, center, flex-start);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba($theme-black, .9);
+  padding-top: 10%;
+  &.open {
+    display: flex;
+  }
+  &.closed {
+    display: none;
+  }
+}
+.model {
+  min-width: 300px;
+  min-height: 300px;
+  background-color: $theme-grey;
+  border-radius: $br-02;
+}

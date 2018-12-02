@@ -1375,8 +1375,35 @@ code {
       font-size: 0.9em;
       padding: 0 1em; }
 
+.model__container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(48, 50, 61, 0.9);
+  padding-top: 10%; }
+  .model__container.open {
+    display: flex; }
+  .model__container.closed {
+    display: none; }
+
+.model {
+  min-width: 300px;
+  min-height: 300px;
+  background-color: #4D5061;
+  border-radius: 0.5em; }
+
 .party__list {
   list-style: none; }
+
+.party__item--btn-pair {
+  max-width: 100%;
+  padding-left: 1em; }
 
 .party__link {
   display: flex;
@@ -1411,7 +1438,6 @@ code {
   min-height: calc(100% - 6em); }
 
 .dispatch {
-  display: flex;
   border-radius: 0.5em;
   background-color: #eee;
   color: #30323D;
@@ -1423,3 +1449,15 @@ code {
     background-color: #E8C547; }
   .dispatch:last-of-type {
     margin-bottom: 3em; }
+
+.dispatch__account {
+  font-size: 0.9em;
+  font-weight: 700; }
+
+.dispatch__time {
+  font-size: 0.75em;
+  font-weight: 500;
+  color: #697479; }
+
+.dispatch__message {
+  font-size: 1.125em; }

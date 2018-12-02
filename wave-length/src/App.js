@@ -17,7 +17,7 @@ class App extends Component {
       accountInfo: {
         accountLoggedIn: true,
         accountLevel: 'user',
-        accountId: 1,
+        accountid: 1,
       }
     }
   }

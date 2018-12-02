@@ -2,7 +2,10 @@
   list-style: none;
 }
 
-.party__item {}
+.party__item--btn-pair {
+  max-width: 100%;
+  padding-left: 1em;
+}
 .party__link {
   @include flex(row, nowrap, flex-start, center);
   @include transition(color);

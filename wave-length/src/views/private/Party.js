@@ -73,8 +73,11 @@ class Party extends React.Component {
             <fieldset className="field btn-pair">
               <div className="field--btn-pair">
                 <input type="text" className="input full btn-pair" onChange={this.onChange}/>
-                <button className="btn--input" onClick={this.createDispatch}>Send</button>
+                <button className="btn--input" type="button" onClick={this.createDispatch}>Send</button>
               </div>
+            </fieldset>
+            <fieldset className="field">
+              <button type="button" className="btn full breath danger" onClick={this.deleteParty}>Delete Party</button>
             </fieldset>
           </form>
         </div>

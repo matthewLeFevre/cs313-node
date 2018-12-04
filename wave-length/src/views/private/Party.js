@@ -19,15 +19,27 @@ class Party extends React.Component {
         dispatches: res.data,
       })
     })
-    console.log("mounted party")
-    // this.setState({
-    //   dispatches: [
-    //     {dispatchtext: "hello how are you today?", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
-    //     {dispatchtext: "I am doing well how are you?", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
-    //     {dispatchtext: "It was a bit snowy today.", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
-    //     {dispatchtext: "I enjoyed going to the movies last night.", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
-    //   ],
-    // });
+    // console.log("mounted party")
+    this.setState({
+      dispatches: [
+        {dispatchtext: "hello how are you today?", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
+        {dispatchtext: "I am doing well how are you?", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
+        {dispatchtext: "It was a bit snowy today.", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
+        {dispatchtext: "I enjoyed going to the movies last night.", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
+      ],
+    });
+  }
+
+  deleteParty() {
+    let body = {
+      partyId: this.props.match.params.partyid,
+    }
+    let req = Globals.createRequestBody(body);
+    fetch('/deleteParty', req)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+    })
   }
 
   createDispatch() {
@@ -60,7 +72,7 @@ class Party extends React.Component {
             <fieldset className="field btn-pair">
               <div className="field--btn-pair">
                 <input type="text" className="input full btn-pair" onChange={this.onChange}/>
-                <button className="btn--input">Send</button>
+                <button className="btn--input" onClick={this.createDispatch}>Send</button>
               </div>
             </fieldset>
           </form>

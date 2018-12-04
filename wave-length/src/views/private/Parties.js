@@ -54,7 +54,7 @@ class Parties extends React.Component {
         <ul className="party__list col--lrg--2 col--mdm--3 col--4 bg-theme-black">
           {this.props.parties.map( (party, index) => {
             let remove = '';
-            if(party.accountid === this.props.accountInfo.accountId) {
+            if(party.accountid === this.props.accountInfo.accountid) {
               remove = <i className="fas fa-times-circle txt-red" onClick={this.deleteParty(party.partyid)}/>;
             }
             return (

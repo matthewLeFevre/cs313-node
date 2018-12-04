@@ -1,4 +1,5 @@
 import React from 'react';
+import Globals from '../../services/Globals';
 
 class Party extends React.Component {
   constructor(props) {
@@ -6,7 +7,7 @@ class Party extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.state = {
       dispatches: [],
-      dispatchText: '',
+      dispatchtext: '',
     };
   }
   componentDidMount() {
@@ -30,11 +31,23 @@ class Party extends React.Component {
   }
 
   createDispatch() {
-
+    let data = {
+      accountid: this.props.accountInfo.accountid,
+      partid: this.props.match.params.partyid,
+      dispatchtext: this.state.dispatchtext
+    }
+    let req = Globals.createRequestBody(data);
+    fetch('/createDispatch', req)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+    });
   }
 
   onChange(e) {
-
+    this.setState({
+      dispatchtext: e.target.value,
+    });
   }
   render() {
     return (

@@ -45,7 +45,7 @@ class Party extends React.Component {
   createDispatch() {
     let data = {
       accountid: this.props.accountInfo.accountid,
-      partid: this.props.match.params.partyid,
+      partyid: this.props.match.params.partyid,
       dispatchtext: this.state.dispatchtext
     }
     let req = Globals.createRequestBody(data);

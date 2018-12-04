@@ -120,8 +120,25 @@ app.post("/addAccountToParty", async (req, res) => {
   }
 });
 
-app.post("/deleteParty", async (req, res) => {})
-app.post("/createDispatch", async (req, res) => {})
+app.post("/deleteParty", async (req, res) => {
+  try {
+    let deleteParty = await partyModule.deleteDispatch(req.body.partyId);
+    console.log(deleteParty);
+    res.send(deleteParty);
+  } catch (err) {
+    console.log(err);
+  }
+})
+app.post("/createDispatch", async (req, res) => {
+  try {
+    res.send(res.body.data);
+    // let createDispatch = await partyModule.createDispatch(req.body.data);
+    // console.log(createDispatch);
+    // res.send(partyModule.getDispatchesByParty(req.body.partyid));
+  } catch(err) {
+    console.log(err);
+  }
+})
 app.post("/deleteDispatch", async (req, res) => {})
 
 app.all("*", (req, res) => {

@@ -1,0 +1,36 @@
+After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
+
+1. Project Title / One sentence description:
+
+Wave Length
+
+2. Copy and paste the URL for your web application (if applicable):
+
+https://blunderly.herokuapp.com/
+
+3. Copy and paste the URL for your source code repository (e.g., GitHub):
+
+https://github.com/matthewLeFevre/cs313-node
+
+4. Describe the functionality that is currently working, along with any special instructions of how to use your web application:
+
+data is being populated where it should be. you can go to parties and create a new party.
+
+5. Describe the features that are not yet working correctly.
+
+you cannot yet create a user account, log in with a user account, or create a dispatch. or add a user to a group
+
+6. Please select the category you feel best describes your assignment:
+A - Some attempt was made
+B - Developing, but significantly deficient
+C - Slightly deficient, but still mostly adequate
+D - Meets requirements
+E - Shows creativity and excels above and beyond requirements
+
+C
+
+7. Provide a brief justification (1-2 sentences) for selecting that category.
+
+I readily admit that not everything is functional and I could have spent more time on the project this week I meerly decided to not.
+
+8. Please list any questions you have for the instructor regarding this assignment or this week's topic.

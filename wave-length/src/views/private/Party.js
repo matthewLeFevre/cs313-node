@@ -3,8 +3,10 @@ import React from 'react';
 class Party extends React.Component {
   constructor(props) {
     super(props);
+    this.onChange = this.onChange.bind(this);
     this.state = {
       dispatches: [],
+      dispatchText: '',
     };
   }
   componentDidMount() {
@@ -26,6 +28,14 @@ class Party extends React.Component {
     //   ],
     // });
   }
+
+  createDispatch() {
+
+  }
+
+  onChange(e) {
+
+  }
   render() {
     return (
       <article className="col--8 col--mdm--9 col--lrg--10 bg-theme-blue">
@@ -36,7 +46,7 @@ class Party extends React.Component {
           <form>
             <fieldset className="field btn-pair">
               <div className="field--btn-pair">
-                <input type="text" className="input full btn-pair" />
+                <input type="text" className="input full btn-pair" onChange={this.onChange}/>
                 <button className="btn--input">Send</button>
               </div>
             </fieldset>

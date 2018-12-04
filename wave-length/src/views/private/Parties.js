@@ -27,6 +27,17 @@ class Parties extends React.Component {
       console.log(res);
     });
   }
+  deleteParty(partyid) {
+    let body = {
+      partyId: partyid,
+    }
+    let req = Globals.createRequestBody(body);
+    fetch('/deleteParty', req)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+    })
+  }
   newParty() {
     this.setState((prevState) => ({
       toggleNewParty: !prevState.toggleNewParty,
@@ -42,9 +53,13 @@ class Parties extends React.Component {
       <div className="grid page__full--header">
         <ul className="party__list col--lrg--2 col--mdm--3 col--4 bg-theme-black">
           {this.props.parties.map( (party, index) => {
+            let remove = '';
+            if(party.accountid === this.props.accountInfo.accountId) {
+              remove = <i className="fas fa-times-circle txt-red" onClick={this.deleteParty(party.partyid)}/>;
+            }
             return (
               <li className="party__item" key={index}>
-                <NavLink activeClassName="party__link active" to={`/dashboard/parties/${party.partyid}`} className="party__link ">{party.partyname}</NavLink></li>
+                <NavLink activeClassName="party__link active" to={`/dashboard/parties/${party.partyid}`} className="party__link ">{party.partyname}&nbsp;{remove}</NavLink></li>
             );
           })}
           <li className="party__item--btn-pair">

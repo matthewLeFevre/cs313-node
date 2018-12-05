@@ -130,7 +130,7 @@ exports.deleteDispatch = async (dispatchid) => {
 }
 exports.createDispatch = async (dispatchInfo) => {
   try {
-    console.log(dispatchinfo);
+    console.log(dispatchInfo);
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
       ssl: true,

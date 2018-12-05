@@ -37,6 +37,7 @@ class Dashboard extends React.Component {
             ? <Admin {...props} />
             : <Redirect to="/login" />
            }/>
+          <Route path="/dashboard" render={(props) => <Redirect to="/dashboard/parties" />} />
         </Switch>
       </div>
     );

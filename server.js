@@ -131,7 +131,7 @@ app.post("/deleteParty", async (req, res) => {
 })
 app.post("/createDispatch", async (req, res) => {
   try {
-    res.send(re1.body.data);
+    res.send(req.body.data);
     console.log(req.body.data);
     // let createDispatch = await partyModule.createDispatch(req.body.data);
     // console.log(createDispatch);

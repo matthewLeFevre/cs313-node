@@ -26,7 +26,7 @@ app.get("/getAccount/:id", async (req, res) => {
 app.get("/accounts", async (req, res) => {
   let accounts = await accountModule.getAccounts();
   console.log(accounts);
-  res.send({data: accounts.rows});
+  res.send({data: accounts});
 });
 
 app.post("/createAccount", async (req, res) => {

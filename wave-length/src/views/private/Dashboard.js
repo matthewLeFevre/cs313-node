@@ -22,9 +22,17 @@ class Dashboard extends React.Component {
   }
 
   updateParties(parties) {
-    this.setState({
-      parties: parties,
-    });
+    if(parties) {
+      this.setState({
+        parties: parties,
+      });
+    } else {
+      fetch(`/partiesByAccount/${this.props.accountInfo.accountid}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({parties: res.data});
+      });
+    }
   }
   render () {
     return (

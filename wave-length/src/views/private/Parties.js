@@ -13,6 +13,10 @@ class Parties extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.updateParties(false);
+  }
+
   createParty() {
     let body = {
       partyName: this.state.partyName,

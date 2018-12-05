@@ -133,7 +133,9 @@ app.post("/createDispatch", async (req, res) => {
   try {
     let data = {accountid: req.body.accountid, partyid: req.body.partyid, dispatchtext: req.body.dispatchtext};
     let createDispatch = await partyModule.createDispatch(data);
-    res.send({data: partyModule.getDispatchesByParty(req.body.partyid)});
+    let dispatches = await partyModule.getDispatchesByParty(req.body.partyid);
+    console.log(dispatches);
+    res.send({data: dispatches});
   } catch(err) {
     console.log(err);
   }

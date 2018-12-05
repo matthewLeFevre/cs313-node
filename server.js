@@ -50,12 +50,13 @@ app.post("/loginAccount", async (req, res) => {
       console.log(account);
       console.log(account.accountpassword, req.body.accountPassword);
       if(account.accountpassword === req.body.accountPassword) {
-        res.send(JSON.stringify(account));
+        res.send({status: "success", data: account});
       } else {
-        res.send("<h1>User was not loggedin</h1>");
+        res.send({status: "failure", message: "user was not loggedin!"});
       }
     } else {
       console.log(req);
+      res.send({status: "failure", message: "account does not exist"});
     }
   } catch (err) {
     console.log(err);

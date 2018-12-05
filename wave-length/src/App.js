@@ -13,13 +13,22 @@ import Dashboard from './views/private/Dashboard';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.login = this.login.bind(this);
     this.state = {
       accountInfo: {
-        accountLoggedIn: true,
-        accountLevel: 'user',
-        accountid: 2,
+        accountLoggedIn: false,
       }
     }
+  }
+
+  login (accountInfo) {
+    this.setState({
+      accountInfo: {
+        accountLoggedIn: true,
+        accountid: accountInfo.accountid,
+        accountLevel: 'user',
+      }
+    });
   }
 
   logout () {
@@ -35,7 +44,7 @@ class App extends Component {
             <Route path="/" exact={true}  component={Home} />
             <Route path="/home" component={Home} />
             <Route path="/about" component={About} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" render={(props) => <Login login={this.login} {...props} />} />
             <Route path="/singup" component={Signup} />
             <Route path="/dashboard" render={(props) => <Dashboard accountInfo={this.state.accountInfo} {...props}/>} />
           </Switch>

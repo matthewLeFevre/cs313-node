@@ -29,6 +29,7 @@ class Party extends React.Component {
     fetch("/accounts")
     .then(res => res.json())
     .then(res => {
+      console.log(res.data);
       this.setState({
         accounts: res.data
       });

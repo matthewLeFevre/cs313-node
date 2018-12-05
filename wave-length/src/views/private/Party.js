@@ -56,14 +56,10 @@ class Party extends React.Component {
     .then(res => res.json())
     .then(res => {
       console.log(res.data);
-      this.updateDispatches(res.data);
+      this.setState({
+        dispatches: res.data,
+      })
     });
-  }
-
-  updateDispatches(newDispatches) {
-    this.setState({
-      dispatches: newDispatches,
-    })
   }
 
   onChange(e) {

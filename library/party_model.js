@@ -135,7 +135,7 @@ exports.createDispatch = async (dispatchInfo) => {
       connectionString: process.env.DATABASE_URL,
       ssl: true,
     });
-    const query = await pool.query(`INSERT INTO dispatch (accountId, partyId, dispatchText) VALUES (${dispatchInfo.accountid}, ${dispatchInfo.partyid}, ${dispatchInfo.dispatchtext});`);
+    const query = await pool.query(`INSERT INTO dispatch (accountId, partyId, dispatchText) VALUES (${dispatchInfo.accountid}, ${dispatchInfo.partyid}, '${dispatchInfo.dispatchtext}');`);
     return query;
   } catch (err) {
     console.log(err);

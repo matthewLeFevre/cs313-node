@@ -7,7 +7,6 @@ class Party extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.createDispatch = this.createDispatch.bind(this);
     this.deleteParty = this.deleteParty.bind(this);
-    this.updateDispatches = this.updateDispatches.bind(this);
     this.state = {
       dispatches: [],
       dispatchtext: '',

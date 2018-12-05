@@ -132,10 +132,9 @@ app.post("/deleteParty", async (req, res) => {
 app.post("/createDispatch", async (req, res) => {
   try {
     res.send(req.body.dispatchtext);
-    console.log(req.body.dispatchtext);
-    // let createDispatch = await partyModule.createDispatch(req.body.data);
-    // console.log(createDispatch);
-    // res.send(partyModule.getDispatchesByParty(req.body.partyid));
+    let data = {accountid: req.body.accountid, partyid: req.body.partyid, dispatchtext: req.body.dispatchtext};
+    let createDispatch = await partyModule.createDispatch(data);
+    res.send(partyModule.getDispatchesByParty(req.body.partyid));
   } catch(err) {
     console.log(err);
   }

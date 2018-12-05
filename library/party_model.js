@@ -116,13 +116,14 @@ exports.deleteParty = async (partyId) => {
     console.log(err);
   }
 }
-exports.deleteDispatch = async (dispatchId) => {
+exports.deleteDispatch = async (dispatchid) => {
   try {
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
       ssl: true,
     });
-    const query = await pool.query(`DELETE FROM dispatch WHERE dispatchId = ${dispatchId};`);
+    const query = await pool.query(`DELETE FROM dispatch WHERE dispatchId = ${dispatchid};`);
+    return query;
   } catch (err) {
     console.log(err);
   }

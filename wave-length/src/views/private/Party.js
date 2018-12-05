@@ -9,12 +9,16 @@ class Party extends React.Component {
     this.createDispatch = this.createDispatch.bind(this);
     this.deleteParty = this.deleteParty.bind(this);
     this.showAccounts = this.showAccounts.bind(this);
+    this.addAccountToParty = this.addAccountToParty.bind(this);
+    this.handelAccountId = this.handelAccountId.bind(this);
+    this.updateDispatches = this.updateDispatches.bind(this);
     this.state = {
       dispatches: [],
       wasDeleted: false,
       dispatchtext: '',
       accounts: [],
       showAccounts: false,
+      accountId: '',
     };
   }
   componentDidMount() {
@@ -34,6 +38,7 @@ class Party extends React.Component {
         accounts: res.data
       });
     });
+    this.updateDispatches();
   }
 
   deleteParty() {
@@ -72,6 +77,32 @@ class Party extends React.Component {
     });
   }
 
+  addAccountToParty() {
+    let data = {
+      accountId: this.state.accountId,
+      partyId: this.props.match.params.partyid
+    }
+    let req = Globals.createRequestBody(data);
+    fetch('/addAccountToParty', req)
+    .then(res => res.json())
+    .then(res => {
+      window.alert(res.status);
+    })
+  }
+
+  updateDispatches() {
+    setInterval(() => {
+      fetch(`/dispatchesByParty/${this.props.match.params.partyid}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        this.setState({
+          dispatches: res.data,
+        });
+      });
+    }, 3000);
+  }
+
   showAccounts() {
     this.setState((prevState) => ({
       showAccounts: !prevState.showAccounts,
@@ -82,6 +113,12 @@ class Party extends React.Component {
     this.setState({
       dispatchtext: e.target.value,
     });
+  }
+
+  handelAccountId(e) {
+    this.setState({
+      accountId: e.target.value,
+    })
   }
   render() {
 
@@ -105,16 +142,20 @@ class Party extends React.Component {
               </fieldset>
               <fieldset className="field">
                 <label className="label">Add Accounts to Party</label>
+              </fieldset>
                 {this.state.showAccounts 
-                  ? <select name="accountName" className="input--select full breath">
-                      {this.state.accounts.map((accounts, index) => {
-                        return (
-                          <option value={accounts.accountid}>{accounts.accountname}</option>
-                        );
-                      })}
-                    </select>
+                  ? <fieldset className="field">
+                      <select name="accountName" onChange={this.handelAccountId} className="input--select full breath">
+                        {this.state.accounts.map((accounts, index) => {
+                          return (
+                            <option value={accounts.accountid}>{accounts.accountname}</option>
+                          );
+                        })}
+                      </select>
+                      <button type="button" onClick={this.addAccountToParty} className="btn breath success">Add selected account to party</button>
+                    </fieldset>
                   : ''}
-                { this.state.showAccounts ? <button type="button" className="btn breath success">Add selected account to party</button> : ''}
+              <fieldset className="field">
                 <button onClick={this.showAccounts} type="button" className="btn breath primary">{this.state.showAccounts ? "Hide Acconts" : "Show accounts"}</button>
               </fieldset>
               <fieldset className="field">

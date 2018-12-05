@@ -14,6 +14,7 @@ class Party extends React.Component {
       wasDeleted: false,
       dispatchtext: '',
       accounts: [],
+      showAccounts: false,
     };
   }
   componentDidMount() {
@@ -85,7 +86,7 @@ class Party extends React.Component {
 
     if (this.state.wasDeleted) {
       return (
-        <Redirect to="/dashboard/parties" />
+        <Redirect to="/dashboard" />
         );
     } else {
       return (
@@ -112,8 +113,8 @@ class Party extends React.Component {
                       })}
                     </select>
                   : ''}
-                { this.state.showAccounts ? <button type="button" className="btn success">Add selected account to party</button> : ''}
-                <button onClick={this.showAccounts} type="button" className="button primary">{this.state.showAccounts ? "Hide Acconts" : "Show accounts"}</button>
+                { this.state.showAccounts ? <button type="button" className="btn breath success">Add selected account to party</button> : ''}
+                <button onClick={this.showAccounts} type="button" className="btn breath primary">{this.state.showAccounts ? "Hide Acconts" : "Show accounts"}</button>
               </fieldset>
               <fieldset className="field">
                 <button type="button" className="btn breath danger" onClick={this.deleteParty}>Delete Party</button>

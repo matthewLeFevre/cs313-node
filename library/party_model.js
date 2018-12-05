@@ -23,6 +23,21 @@ exports.getPartiesByAccountId =  async (id) => {
   }
 }
 
+exports.getAccounts = async () => {
+  try {
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+    const query = await pool.query(`SELECT accountName, accountId from account;`);
+    if (query.rowCount >= 1) {
+      return query.rows;
+    } else {
+      return false;
+    }
+  } catch (err) { console.log(err); }
+}
+
 exports.getDispatchesByParty = async (id) => {
   try {
     const pool = new Pool({

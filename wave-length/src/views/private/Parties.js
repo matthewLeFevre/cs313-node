@@ -6,14 +6,13 @@ import Globals from '../../services/Globals';
 class Parties extends React.Component {
   constructor(props) {
     super(props);
-    this.newParty = this.newParty.bind(this);
     this.createParty = this.createParty.bind(this);
     this.handlePartyName = this.handlePartyName.bind(this);
     this.state ={
-      toggleNewParty: false,
       partyName: '',
     }
   }
+
   createParty() {
     let body = {
       partyName: this.state.partyName,
@@ -27,16 +26,13 @@ class Parties extends React.Component {
       console.log(res);
     });
   }
-  newParty() {
-    this.setState((prevState) => ({
-      toggleNewParty: !prevState.toggleNewParty,
-    }));
-  }
+
   handlePartyName(e) {
     this.setState({
       partyName: e.target.value,
-    })
+    });
   }
+
   render () {
     return (
       <div className="grid page__full--header">

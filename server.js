@@ -14,11 +14,6 @@ app.use(express.static("public"));
 app.set("views", "views");
 app.set('view engine', 'ejs');
 
-// app.get("/", (req, res)=> {
-//   res.render("pages/home");
-// });
-
-
 // user account routes 
 // Need to fileter and check inputs
 
@@ -30,7 +25,7 @@ app.get("/getAccount/:id", async (req, res) => {
 
 app.get("/accounts", async (req, res) => {
   let accounts = await accountModule.getAccounts();
-  res.send(accounts);
+  res.send({data: accounts.rows});
 });
 
 app.post("/createAccount", async (req, res) => {
@@ -114,36 +109,53 @@ app.post("/addAccountToParty", async (req, res) => {
       partyId = req.body.partyId;
   let addAccountToParty = partyModule.addAccountToParty(accountId, partyId);
   if(addAccountToParty) {
-    res.send("Account added successfully");
+    let accounts = await partyModule.getAccountsByParty(partyId);
+    res.send({status: "success", accounts: accounts});
   } else {
-    res.send("Account did not add successfully");
+    res.send({status: "failure", message: "Account did not add successfully"});
   }
 });
 
 app.post("/deleteParty", async (req, res) => {
   try {
     let deleteParty = await partyModule.deleteParty(req.body.partyId);
-    console.log(deleteParty);
-    res.send(deleteParty);
+    if(deleteParty.rowCount == 1) {
+      res.send({status: "success", message: "Party deleted successfully"});
+    } else {
+      res.send({status: "failure", message: "Party was not deleted successfully"});
+    }
   } catch (err) {
     console.log(err);
   }
-})
+});
+
 app.post("/createDispatch", async (req, res) => {
   try {
     let data = {accountid: req.body.accountid, partyid: req.body.partyid, dispatchtext: req.body.dispatchtext};
     let createDispatch = await partyModule.createDispatch(data);
     let dispatches = await partyModule.getDispatchesByParty(req.body.partyid);
-    console.log(dispatches);
     res.send({data: dispatches});
   } catch(err) {
     console.log(err);
   }
+});
+
+// send dispatch id and party id
+app.post("/deleteDispatch", async (req, res) => {
+  try {
+    let deleteDispatch = await partyModule.deleteDispatch(req.body.dispatchId);
+    if(deleteDispatch.rowCount == 1) {
+      let dispatches = await partyModule.getDispatchesByParty(req.body.partyId);
+      res.send({status: "success", data: dispatches});
+    } else {
+      res.send({status: "failure", message: "Dispatch delete failed."});
+    }
+  } catch (err) {
+    console.log(err);
+  }
 })
-app.post("/deleteDispatch", async (req, res) => {})
 
 app.all("*", (req, res) => {
-  // res.send("<h1>404</h1> <p>Y'all made it somewhere you shouldn'ev blunderyly.</p>")
   res.sendFile(path.join(__dirname+'/wave-length/build/index.html'));
 });
 

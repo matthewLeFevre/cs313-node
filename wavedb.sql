@@ -24,7 +24,7 @@ CREATE TABLE party (
   partyCreated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   accountId int NOT NULL,
   PRIMARY Key (partyId),
-  FOREIGN KEY (accountId) REFERENCES account(accountId)
+  FOREIGN KEY (accountId) REFERENCES account(accountId) ON DELETE CASCADE
 );
 
 CREATE TABLE account_in_party (
@@ -33,8 +33,8 @@ CREATE TABLE account_in_party (
   accountId int NOT NULL,
   partyId int NOT NULL,
   PRIMARY Key (account_in_partyId),
-  FOREIGN KEY (accountId) REFERENCES account(accountId),
-  FOREIGN KEY (partyId) REFERENCES party(partyId)
+  FOREIGN KEY (accountId) REFERENCES account(accountId) ON DELETE CASCADE,
+  FOREIGN KEY (partyId) REFERENCES party(partyId) ON DELETE CASCADE
 );
 
 CREATE TABLE dispatch (
@@ -44,8 +44,8 @@ CREATE TABLE dispatch (
   accountId int NOT NULL,
   partyId int NOT NULL,
   PRIMARY Key (dispatchId),
-  FOREIGN KEY (accountId) REFERENCES account(accountId),
-  FOREIGN KEY (partyId) REFERENCES party(partyId)
+  FOREIGN KEY (accountId) REFERENCES account(accountId) ON DELETE CASCADE,
+  FOREIGN KEY (partyId) REFERENCES party(partyId) ON DELETE CASCADE
 );
 
 INSERT INTO account (accountName, accountPassword)

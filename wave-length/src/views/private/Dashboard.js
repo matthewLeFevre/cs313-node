@@ -17,17 +17,8 @@ class Dashboard extends React.Component {
     fetch(`/partiesByAccount/${this.props.accountInfo.accountid}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       this.setState({parties: res.data});
     });
-    // this.setState({
-    //   parties: [
-    //     {partyid: 1, partyname: "joll's party", partycreated: new Date(), accountId: 5},
-    //     {partyid: 2, partyname: "matt's party", partycreated: new Date(), accountId: 4},
-    //     {partyid: 3, partyname: "amy's party", partycreated: new Date(), accountid: 1},
-    //     {partyid: 4, partyname: "rachel's party", partycreated: new Date(), accountId: 3},
-    //   ]
-    // });
   }
 
   updateParties(parties) {

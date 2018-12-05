@@ -1,5 +1,6 @@
 import React from 'react';
 import Globals from '../../services/Globals';
+import {Redirect} from 'react-router-dom';
 
 class Party extends React.Component {
   constructor(props) {
@@ -7,9 +8,12 @@ class Party extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.createDispatch = this.createDispatch.bind(this);
     this.deleteParty = this.deleteParty.bind(this);
+    this.showAccounts = this.showAccounts.bind(this);
     this.state = {
       dispatches: [],
+      wasDeleted: false,
       dispatchtext: '',
+      accounts: [],
     };
   }
   componentDidMount() {
@@ -19,17 +23,15 @@ class Party extends React.Component {
       console.log(res);
       this.setState({
         dispatches: res.data,
-      })
-    })
-    // console.log("mounted party")
-    // this.setState({
-    //   dispatches: [
-    //     {dispatchtext: "hello how are you today?", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
-    //     {dispatchtext: "I am doing well how are you?", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
-    //     {dispatchtext: "It was a bit snowy today.", accountid: 2, accountname: "Jol", dispatchcreated: new Date()},
-    //     {dispatchtext: "I enjoyed going to the movies last night.", accountid: 1, accountname: "Matt", dispatchcreated: new Date()},
-    //   ],
-    // });
+      });
+    });
+    fetch("/accounts")
+    .then(res => res.json())
+    .then(res => {
+      this.setState({
+        accounts: res.data
+      });
+    });
   }
 
   deleteParty() {
@@ -40,7 +42,14 @@ class Party extends React.Component {
     fetch('/deleteParty', req)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
+      if(res.status === "success") {
+        window.alert(res.message);
+        this.setState({
+          wasDeleted: true,
+        })
+      } else {
+        window.alert(res.message);
+      }
     })
   }
 
@@ -61,32 +70,59 @@ class Party extends React.Component {
     });
   }
 
+  showAccounts() {
+    this.setState((prevState) => ({
+      showAccounts: !prevState.showAccounts,
+    }))
+  }
+
   onChange(e) {
     this.setState({
       dispatchtext: e.target.value,
     });
   }
   render() {
-    return (
-      <article className="col--8 col--mdm--9 col--lrg--10 bg-theme-blue">
-        <div className="dispatch__container">
-          { this.state.dispatches.map((dispatch, index) => {
-            return(<Dispatch dispatch={dispatch} key={index} accountInfo={this.props.accountInfo} />)
-          })}
-          <form>
-            <fieldset className="field btn-pair">
-              <div className="field--btn-pair">
-                <input type="text" className="input full btn-pair" onChange={this.onChange}/>
-                <button className="btn--input" type="button" onClick={this.createDispatch}>Send</button>
-              </div>
-            </fieldset>
-            <fieldset className="field">
-              <button type="button" className="btn full breath danger" onClick={this.deleteParty}>Delete Party</button>
-            </fieldset>
-          </form>
-        </div>
-      </article>
-    );
+
+    if (this.state.wasDeleted) {
+      return (
+        <Redirect to="/dashboard/parties" />
+        );
+    } else {
+      return (
+        <article className="col--8 col--mdm--9 col--lrg--10 bg-theme-blue">
+          <div className="dispatch__container">
+            { this.state.dispatches.map((dispatch, index) => {
+              return(<Dispatch dispatch={dispatch} key={index} accountInfo={this.props.accountInfo} />)
+            })}
+            <form>
+              <fieldset className="field btn-pair">
+                <div className="field--btn-pair">
+                  <input type="text" className="input full btn-pair" onChange={this.onChange}/>
+                  <button className="btn--input" type="button" onClick={this.createDispatch}>Send</button>
+                </div>
+              </fieldset>
+              <fieldset className="field">
+                <label className="label">Add Accounts to Party</label>
+                {this.state.showAccounts 
+                  ? <select name="accountName" className="input--select full breath">
+                      {this.state.accounts.map((accounts, index) => {
+                        return (
+                          <option value={accounts.accountid}>{accounts.accountname}</option>
+                        );
+                      })}
+                    </select>
+                  : ''}
+                { this.state.showAccounts ? <button type="button" className="btn success">Add selected account to party</button> : ''}
+                <button onClick={this.showAccounts} type="button" className="button primary">{this.state.showAccounts ? "Hide Acconts" : "Show accounts"}</button>
+              </fieldset>
+              <fieldset className="field">
+                <button type="button" className="btn breath danger" onClick={this.deleteParty}>Delete Party</button>
+              </fieldset>
+            </form>
+          </div>
+        </article>
+      );
+    }
   }
 }
 

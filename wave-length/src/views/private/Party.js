@@ -7,6 +7,7 @@ class Party extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.createDispatch = this.createDispatch.bind(this);
     this.deleteParty = this.deleteParty.bind(this);
+    this.updateDispatches = this.updateDispatches.bind(this);
     this.state = {
       dispatches: [],
       dispatchtext: '',
@@ -54,8 +55,15 @@ class Party extends React.Component {
     fetch('/createDispatch', req)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
+      console.log(res.data);
+      this.updateDispatches(res.data);
     });
+  }
+
+  updateDispatches(newDispatches) {
+    this.setState({
+      dispatches: newDispatches,
+    })
   }
 
   onChange(e) {

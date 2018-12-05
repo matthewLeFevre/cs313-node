@@ -122,7 +122,7 @@ app.post("/addAccountToParty", async (req, res) => {
 
 app.post("/deleteParty", async (req, res) => {
   try {
-    let deleteParty = await partyModule.deleteDispatch(req.body.partyId);
+    let deleteParty = await partyModule.deleteParty(req.body.partyId);
     console.log(deleteParty);
     res.send(deleteParty);
   } catch (err) {

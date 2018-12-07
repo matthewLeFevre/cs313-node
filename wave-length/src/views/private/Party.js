@@ -44,7 +44,7 @@ class Party extends React.Component {
   }
 
   componentDidUpdate() {
-    if(this.props.params.partyid !== this.state.partyid) {
+    if(this.props.match.params.partyid !== this.state.partyid) {
       fetch(`/dispatchesByParty/${this.props.match.params.partyid}`)
       .then(res => res.json())
       .then(res => {

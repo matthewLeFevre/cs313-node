@@ -52,8 +52,6 @@ app.post("/loginAccount", async (req, res) => {
     console.log(accountModule.checkAccountName(req.body.accountName));
     if (accountModule.checkAccountName(req.body.accountName)) {
       let account = await accountModule.getAccountInfo(req.body.accountName).then(data => {return data;});
-      console.log(account);
-      console.log(account.accountpassword, req.body.accountPassword);
       if(account.accountpassword === req.body.accountPassword) {
         res.send({status: "success", data: account});
       } else {

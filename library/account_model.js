@@ -7,7 +7,6 @@ exports.checkAccountName = async function(accountName) {
       ssl: true,
     });
     const response = await pool.query(`SELECT accountName FROM account WHERE accountName = '${accountName}'`);
-    console.log(response.rowCount);
     if (response.rowCount === 1) {
       return true;
     } else {

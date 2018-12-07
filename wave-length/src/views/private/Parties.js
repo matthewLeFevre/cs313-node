@@ -10,6 +10,7 @@ class Parties extends React.Component {
     this.handlePartyName = this.handlePartyName.bind(this);
     this.state ={
       partyName: '',
+      partyOpen: false,
     }
   }
 
@@ -37,16 +38,22 @@ class Parties extends React.Component {
     });
   }
 
+  partyOpen() {
+    this.setState = ({
+      partyOpen: true,
+    });
+  }
+
   render () {
     return (
       <div className="grid page__full--header">
         <ul className="party__list col--lrg--2 col--mdm--3 col--4 bg-theme-black">
-          {this.props.parties.map( (party, index) => {
+          {this.props.parties ? this.props.parties.map( (party, index) => {
             return (
               <li className="party__item" key={index}>
                 <NavLink activeClassName="party__link active" to={`/dashboard/parties/${party.partyid}`} className="party__link ">{party.partyname}</NavLink></li>
             );
-          })}
+          }) : ''}
           <li className="party__item--btn-pair">
               <fieldset className="field">
                 <div className="field--btn-pair">
@@ -55,8 +62,15 @@ class Parties extends React.Component {
                 </div>
               </fieldset>
           </li>
-        </ul>
-        <Route path="/dashboard/parties/:partyid" render={(props) => <Party accountInfo={this.props.accountInfo} {...props} />} />
+        </ul> 
+        {this.state.partyOpen ? ''
+        :  <div className="col--8 col--mdm--9 col--lrg--10 bg-theme-blue">
+           <section className="format_text">
+            <h1>Welcome to your dashboard</h1>
+            <p>On the left you will see the parties that you are a part of either you have created them or someone else has invited your to it.</p>
+           </section>
+        </div>}
+        <Route path="/dashboard/parties/:partyid" render={(props) => <Party accountInfo={this.props.accountInfo} partyOpen={this.partyOpen} {...props} />} />
       </div>
     );
   }

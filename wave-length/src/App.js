@@ -32,8 +32,13 @@ class App extends Component {
   }
 
   logout () {
-    return console.log("blue");
+    this.setState =({
+      accountInfo: {
+        accountLoggedIn: false,
+      }
+    });
   }
+
 
   render() {
     return (

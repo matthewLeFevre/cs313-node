@@ -62,6 +62,7 @@ class Party extends React.Component {
           accounts: res.data
         });
       });
+      this.props.partyOpen();
     }
   }
 
@@ -153,6 +154,15 @@ class Party extends React.Component {
     } else {
       return (
         <article className="col--8 col--mdm--9 col--lrg--10 bg-theme-blue">
+          <form className="form">
+            <fieldset className="field">
+              {this.state.accounts.map((account, index) => {
+                return(
+                  <button type="button" className="btn aciton">account.accountname</button>
+                );
+              })}
+            </fieldset>
+          </form>
           <div className="dispatch__container">
             { this.state.dispatches.map((dispatch, index) => {
               return(<Dispatch dispatch={dispatch} key={index} accountInfo={this.props.accountInfo} />)

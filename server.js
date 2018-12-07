@@ -49,6 +49,7 @@ app.post("/createAccount", async (req, res) => {
 
 app.post("/loginAccount", async (req, res) => {
   try {
+    console.log(accountModule.checkAccountName(req.body.accountName));
     if (accountModule.checkAccountName(req.body.accountName)) {
       let account = await accountModule.getAccountInfo(req.body.accountName).then(data => {return data;});
       console.log(account);

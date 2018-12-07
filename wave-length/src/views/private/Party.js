@@ -19,6 +19,7 @@ class Party extends React.Component {
       accounts: [],
       showAccounts: false,
       accountId: '',
+      partyid: ''
     };
   }
   componentDidMount() {
@@ -28,6 +29,7 @@ class Party extends React.Component {
       console.log(res);
       this.setState({
         dispatches: res.data,
+        partyid: this.props.match.params.partyid
       });
     });
     fetch("/accounts")
@@ -39,6 +41,28 @@ class Party extends React.Component {
       });
     });
     this.updateDispatches();
+  }
+
+  componentDidUpdate() {
+    if(this.props.params.partyid !== this.state.partyid) {
+      fetch(`/dispatchesByParty/${this.props.match.params.partyid}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        this.setState({
+          dispatches: res.data,
+          partyid: this.props.match.params.partyid
+        });
+      });
+      fetch("/accounts")
+      .then(res => res.json())
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          accounts: res.data
+        });
+      });
+    }
   }
 
   deleteParty() {

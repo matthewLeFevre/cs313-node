@@ -30,11 +30,7 @@ class Signup extends React.Component {
     fetch("/createAccount", req)
     .then(res => res.json())
     .then(res => {
-      if(res.status === "success") {
-        this.props.login(res.data);
-      } else {
-        window.alert(res.message);
-      }
+      window.alert(res.message);
     });
   }
 

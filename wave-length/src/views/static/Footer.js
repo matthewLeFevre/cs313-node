@@ -13,7 +13,7 @@ const Footer = (props) => {
             <Link to="/about" className="footer-group__link">Privacy</Link>
           </li>
           <li className="footer-group__item">
-            <Link to="/about" className="footer-group__link">Terms of use</Link>
+            <Link to="/about" className="footer-group__link">Terms of Service</Link>
           </li>
           <li className="footer-group__item">
             <Link to="/about" className="footer-group__link">Contact</Link>

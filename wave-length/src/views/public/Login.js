@@ -52,7 +52,7 @@ class Login extends React.Component {
             <input onChange={this.onChange} className="input full main" type="password" name="accountPassword"/>
           </fieldset>
           <fieldset className="field spacing--bottom--1">
-            <button onClick={this.onLogin} className="btn primary full breath" type="button">Login</button>
+            <button onClick={this.onLogin} className="btn action full breath" type="button">Login</button>
           </fieldset>
         </form>
         <section className="format_text">

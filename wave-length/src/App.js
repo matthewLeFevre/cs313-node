@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import './App.css';
 
 import Header from './views/static/Header';
@@ -44,8 +44,11 @@ class App extends Component {
             <Route path="/" exact={true}  component={Home} />
             <Route path="/home" component={Home} />
             <Route path="/about" component={About} />
-            <Route path="/login" render={(props) => <Login login={this.login} {...props} />} />
-            <Route path="/singup" component={Signup} />
+            <Route path="/login" render={(props) => this.state.accountInfo.accountLoggedIn 
+                                                      ? <Redirect to="/dashboard" />
+                                                      : <Login login={this.login} {...props} />
+                                                    } />
+            <Route path="/signup" component={Signup} />
             <Route path="/dashboard" render={(props) => <Dashboard accountInfo={this.state.accountInfo} {...props}/>} />
           </Switch>
           <Footer />

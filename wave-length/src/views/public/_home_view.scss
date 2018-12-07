@@ -1,0 +1,17 @@
+.home__banner {
+  @include flex(row, nowrap, center, center);
+  height: calc(80vh - 60px);
+  background-color: $theme-black;
+}
+.banner__text {
+  color: $light;
+  text-align: center;
+}
+.banner__title {
+  font-size: 5em;
+}
+.banner__sub-title {
+  font-style: italic;
+  margin-bottom: 1em;
+  font-size: $mod;
+}

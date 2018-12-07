@@ -22,7 +22,7 @@
 
 .footer-group__item {
   margin-bottom: .5em;
-  color: $light;
+  color: $theme-black;
   font-size: $sml;
   @include bp-sml {
     font-size: $initial;
@@ -54,7 +54,7 @@
 }
 
 .footer-group__title {
-  font-size: $mid;
+  font-size: $mod;
   font-weight: 700;
   padding-bottom: .5em;
   @include bp-sml {

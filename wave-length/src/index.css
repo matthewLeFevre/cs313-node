@@ -628,7 +628,7 @@ body {
 
 .footer-group__item {
   margin-bottom: .5em;
-  color: #eee;
+  color: #30323D;
   font-size: 0.9em; }
   @media screen and (min-width: 48em) {
     .footer-group__item {
@@ -655,7 +655,7 @@ body {
     text-decoration: underline; }
 
 .footer-group__title {
-  font-size: 1.25em;
+  font-size: 1.9em;
   font-weight: 700;
   padding-bottom: .5em; }
   @media screen and (min-width: 48em) {
@@ -670,6 +670,11 @@ body {
   background-color: #30323D;
   color: #E8C547;
   height: 60px; }
+
+.header__logo {
+  padding-left: 1em;
+  font-size: 1.25em;
+  font-weight: 700; }
 
 .nav {
   height: 60px;
@@ -1461,3 +1466,23 @@ code {
 
 .dispatch__message {
   font-size: 1.125em; }
+
+.home__banner {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  height: calc(80vh - 60px);
+  background-color: #30323D; }
+
+.banner__text {
+  color: #eee;
+  text-align: center; }
+
+.banner__title {
+  font-size: 5em; }
+
+.banner__sub-title {
+  font-style: italic;
+  margin-bottom: 1em;
+  font-size: 1.9em; }

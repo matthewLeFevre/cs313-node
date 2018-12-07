@@ -49,17 +49,18 @@ app.post("/createAccount", async (req, res) => {
 
 app.post("/loginAccount", async (req, res) => {
   try {
-    accountModule.checkAccountName(req.body.accountName).then(data => console.log(data));
-    if (accountModule.checkAccountName(req.body.accountName) > 0) {
-      let account = await accountModule.getAccountInfo(req.body.accountName).then(data => {return data;});
-      if(account.accountpassword === req.body.accountPassword) {
-        res.send({status: "success", data: account});
+    accountModule.checkAccountName(req.body.accountName).then(data => {
+      if (data) {
+        let account = await accountModule.getAccountInfo(req.body.accountName).then(data => {return data;});
+        if(account.accountpassword === req.body.accountPassword) {
+          res.send({status: "success", data: account});
+        } else {
+          res.send({status: "failure", message: "user was not loggedin!"});
+        }
       } else {
-        res.send({status: "failure", message: "user was not loggedin!"});
+        res.send({status: "failure", message: "account does not exist"});
       }
-    } else {
-      res.send({status: "failure", message: "account does not exist"});
-    }
+    });
   } catch (err) {
     console.log(err);
   }

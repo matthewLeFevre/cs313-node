@@ -34,8 +34,8 @@ app.post("/createAccount", async (req, res) => {
     if(!accountModule.checkAccountName(req.body.accountName)) {
       res.send({status: "failure", message: "An account with that username already exists. Please choose a different username."})
     } else {
-      let createAccount = await accountModule.createAccount(req.body.accountName, req.body.accountPassword).then(res => console.log(res));
-      console.log(createAccount.rowCount);
+      let createAccount = await accountModule.createAccount(req.body.accountName, req.body.accountPassword));
+      // console.log(createAccount.rowCount);
       if (createAccount.rowCount === 1) {
         res.send({status: "success", message: "Account Created successfully please loging"});
       } else {

@@ -49,7 +49,7 @@ app.post("/createAccount", async (req, res) => {
 
 app.post("/loginAccount", async (req, res) => {
   try {
-    console.log(accountModule.checkAccountName(req.body.accountName));
+    accountModule.checkAccountName(req.body.accountName).then(data => console.log(data));
     if (accountModule.checkAccountName(req.body.accountName) > 0) {
       let account = await accountModule.getAccountInfo(req.body.accountName).then(data => {return data;});
       if(account.accountpassword === req.body.accountPassword) {

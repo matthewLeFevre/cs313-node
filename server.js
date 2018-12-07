@@ -31,19 +31,20 @@ app.get("/accounts", async (req, res) => {
 
 app.post("/createAccount", async (req, res) => {
   try {
-    if(!accountModule.checkAccountName(req.body.accountName)) {
-      res.send({status: "failure", message: "An account with that username already exists. Please choose a different username."})
-    } else {
-      let createAccount = await accountModule.createAccount(req.body.accountName, req.body.accountPassword);
-      // console.log(createAccount.rowCount);
-      if (createAccount.rowCount === 1) {
-        res.send({status: "success", message: "Account Created successfully please loging"});
+    accountModule.checkAccountName(req.body.accountName).then(async (data) => {
+      if(data) {
+        res.send({status: "failure", message: "An account with that username already exists. Please choose a different username."})
       } else {
-        res.send({status: "failure", message: "An error occured. Please try again."});
+        let createAccount = await accountModule.createAccount(req.body.accountName, req.body.accountPassword).then(data => {return data;});
+        if (createAccount.rowCount === 1) {
+          res.send({status: "success", message: "Account Created successfully please loging"});
+        } else {
+          res.send({status: "failure", message: "An error occured. Please try again."});
+        }
       }
-      }
-    } catch (err) {
-      console.log(err);
+    })
+  } catch (err) {
+    console.log(err);
   }
 });
 

@@ -12,6 +12,7 @@ class Party extends React.Component {
     this.addAccountToParty = this.addAccountToParty.bind(this);
     this.handelAccountId = this.handelAccountId.bind(this);
     this.updateDispatches = this.updateDispatches.bind(this);
+    this.sendEnter = this.sendEnter.bind(this);
     this.state = {
       dispatches: [],
       wasDeleted: false,
@@ -95,9 +96,9 @@ class Party extends React.Component {
     fetch('/createDispatch', req)
     .then(res => res.json())
     .then(res => {
-      console.log(res.data);
       this.setState({
         dispatches: res.data,
+        dispatchtext: '',
       })
     });
   }
@@ -145,6 +146,13 @@ class Party extends React.Component {
       accountId: e.target.value,
     })
   }
+
+  sendEnter(e) {
+    if(e.keyCode === 13) {
+      e.preventDefault();
+      this.createDispatch();
+    }
+  }
   render() {
 
     if (this.state.wasDeleted) {
@@ -158,7 +166,7 @@ class Party extends React.Component {
             <fieldset className="field">
               {this.state.accounts.map((account, index) => {
                 return(
-                  <button type="button" className="btn aciton">account.accountname</button>
+                  <button type="button" className="btn aciton breath">{account.accountname}</button>
                 );
               })}
             </fieldset>
@@ -170,7 +178,7 @@ class Party extends React.Component {
             <form>
               <fieldset className="field btn-pair">
                 <div className="field--btn-pair">
-                  <input type="text" className="input full btn-pair" onChange={this.onChange}/>
+                  <input type="text" className="input full btn-pair" defaultValue={this.state.dispatchtext} onKeyDown={this.sendEnter} onChange={this.onChange}/>
                   <button className="btn--input" type="button" onClick={this.createDispatch}>Send</button>
                 </div>
               </fieldset>

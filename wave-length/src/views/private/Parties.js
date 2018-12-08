@@ -63,13 +63,13 @@ class Parties extends React.Component {
               </fieldset>
           </li>
         </ul> 
-        {this.state.partyOpen ? ''
+        {/* {this.state.partyOpen ? ''
         :  <div className="col--8 col--mdm--9 col--lrg--10 bg-theme-blue">
            <section className="format_text">
             <h1>Welcome to your dashboard</h1>
             <p>On the left you will see the parties that you are a part of either you have created them or someone else has invited your to it.</p>
            </section>
-        </div>}
+        </div>} */}
         <Route path="/dashboard/parties/:partyid" render={(props) => <Party accountInfo={this.props.accountInfo} partyOpen={this.partyOpen} {...props} />} />
       </div>
     );

@@ -42,13 +42,6 @@ class Party extends React.Component {
         accounts: res.data
       });
     });
-    fetch(`/accountsByParty/${this.props.match.params.partyid}`)
-    .then(res => res.json())
-    .then(res => {
-      this.setState({
-        partyAccounts: res.data,
-      })
-    });
     this.updateDispatches();
   }
 
@@ -70,13 +63,6 @@ class Party extends React.Component {
         this.setState({
           accounts: res.data
         });
-      });
-      fetch(`/accountsByParty/${this.props.match.params.partyid}`)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({
-          partyAccounts: res.data,
-        })
       });
       this.props.partyOpen();
     }
@@ -177,15 +163,15 @@ class Party extends React.Component {
     } else {
       return (
         <article className="col--8 col--mdm--9 col--lrg--10 bg-theme-blue">
-          <form className="form">
+          {/* <form className="form">
             <fieldset className="field">
-              {this.state.partyAccounts.map((account, index) => {
+              {this.state.accounts.map((account, index) => {
                 return(
                   <button type="button" className="btn aciton breath">{account.accountname}</button>
                 );
               })}
             </fieldset>
-          </form>
+          </form> */}
           <div className="dispatch__container">
             { this.state.dispatches.map((dispatch, index) => {
               return(<Dispatch dispatch={dispatch} key={index} accountInfo={this.props.accountInfo} />)

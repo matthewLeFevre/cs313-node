@@ -84,7 +84,7 @@ app.get("/dispatchesByParty/:partyId", async (req, res) => {
 app.get("/accountsByParty/:partyId", async (req, res) => {
   let id = req.params.partyId;
   let accounts = await partyModule.getAccountsByParty(id);
-  res.send(accounts);
+  res.send({data: accounts});
 });
 
 app.post("/createParty", async (req, res) => {

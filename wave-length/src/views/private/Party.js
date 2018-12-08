@@ -18,6 +18,7 @@ class Party extends React.Component {
       wasDeleted: false,
       dispatchtext: '',
       accounts: [],
+      partyAccounts: [],
       showAccounts: false,
       accountId: '',
       partyid: ''
@@ -41,6 +42,13 @@ class Party extends React.Component {
         accounts: res.data
       });
     });
+    fetch(`/accountsByParty/${this.props.match.params.partyid}`)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({
+        partyAccounts: res.data,
+      })
+    });
     this.updateDispatches();
   }
 
@@ -62,6 +70,13 @@ class Party extends React.Component {
         this.setState({
           accounts: res.data
         });
+      });
+      fetch(`/accountsByParty/${this.props.match.params.partyid}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          partyAccounts: res.data,
+        })
       });
       this.props.partyOpen();
     }
@@ -164,7 +179,7 @@ class Party extends React.Component {
         <article className="col--8 col--mdm--9 col--lrg--10 bg-theme-blue">
           <form className="form">
             <fieldset className="field">
-              {this.state.accounts.map((account, index) => {
+              {this.state.partyAccounts.map((account, index) => {
                 return(
                   <button type="button" className="btn aciton breath">{account.accountname}</button>
                 );
@@ -178,7 +193,7 @@ class Party extends React.Component {
             <form>
               <fieldset className="field btn-pair">
                 <div className="field--btn-pair">
-                  <input type="text" className="input full btn-pair" defaultValue={this.state.dispatchtext} onKeyDown={this.sendEnter} onChange={this.onChange}/>
+                  <input type="text" className="input full btn-pair" value={this.state.dispatchtext} onKeyDown={this.sendEnter} onChange={this.onChange}/>
                   <button className="btn--input" type="button" onClick={this.createDispatch}>Send</button>
                 </div>
               </fieldset>
